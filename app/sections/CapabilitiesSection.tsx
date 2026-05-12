@@ -11,6 +11,8 @@ export default function CapabilitiesSection() {
       icon: (
         <Sparkles className="w-12 h-12 text-gray-800" strokeWidth={1} />
       ),
+      hoverText: "Surface every shift across close, variance, and performance with the driver, the source, and the context behind it.",
+      pills: ["Variance detection", "Root cause", "Source-linked"],
     },
     {
       num: "02",
@@ -19,6 +21,8 @@ export default function CapabilitiesSection() {
       icon: (
         <Radio className="w-12 h-12 text-gray-800" strokeWidth={1} />
       ),
+      hoverText: "Trace exceptions to their source, draft explanations, route to the right owner, and keep momentum without manual chasing.",
+      pills: ["Evidence trail", "Smart routing", "Decision prompts"],
     },
     {
       num: "03",
@@ -27,6 +31,8 @@ export default function CapabilitiesSection() {
       icon: (
         <CheckSquare className="w-12 h-12 text-gray-800" strokeWidth={1} />
       ),
+      hoverText: "Finish with reviewed, audit-ready work products with approvals, evidence, and next actions built into every workflow.",
+      pills: ["Reviewed work", "Approvals", "Audit-ready"],
     },
   ];
 
@@ -53,11 +59,31 @@ export default function CapabilitiesSection() {
             {capabilities.map((cap) => (
               <div
                 key={cap.num}
-                className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 flex flex-col min-h-[320px]"
+                className="group bg-white/60 hover:bg-white/80 backdrop-blur-sm transition-colors duration-300 rounded-2xl p-8 flex flex-col min-h-[420px]"
               >
                 <span className="text-meeru-orange text-sm font-medium mb-3">{cap.num}</span>
                 <h3 className="text-2xl font-medium text-gray-900 mb-2">{cap.title}</h3>
                 <p className="text-meeru-orange text-sm leading-relaxed">{cap.desc}</p>
+
+                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500 ease-in-out">
+                  <div className="overflow-hidden">
+                    <div className="pt-5 pb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 flex flex-col gap-4">
+                      <p className="text-gray-800 text-[13px] leading-relaxed font-medium">
+                        {cap.hoverText}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {cap.pills.map((pill) => (
+                          <span 
+                            key={pill} 
+                            className="px-3 py-1 rounded-full border border-orange-200/60 text-meeru-orange text-[10px] tracking-wide font-medium bg-white/50"
+                          >
+                            {pill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="mt-auto pt-10 flex items-end justify-between">
                   <a
@@ -66,7 +92,9 @@ export default function CapabilitiesSection() {
                   >
                     Explore <ArrowRight className="w-4 h-4" />
                   </a>
-                  <div className="opacity-80">{cap.icon}</div>
+                  <div className="opacity-80 transition-transform duration-500 group-hover:scale-110 origin-bottom-right">
+                    {cap.icon}
+                  </div>
                 </div>
               </div>
             ))}

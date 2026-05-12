@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Linkedin, Instagram, Youtube } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function CTAFooterSection() {
   const scrollToTop = () => {
@@ -9,31 +10,45 @@ export default function CTAFooterSection() {
     }
   };
 
+  const fadeUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <section className="relative w-full bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 text-center">
-        <h2 className="text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.15] text-gray-900 max-w-4xl mx-auto mb-6">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.15 } },
+        }}
+        className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 text-center"
+      >
+        <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.15] text-gray-900 max-w-4xl mx-auto mb-6">
           Finance finally has a system that finishes the work, not just explains it.
-        </h2>
-        <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10">
+        </motion.h2>
+        <motion.p variants={fadeUp} className="text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10">
           MeeruAI helps finance teams close faster, explain every variance, and act with confidence
           with source-traced evidence, review, and audit-ready execution built in.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        </motion.p>
+        <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-4">
           <a
             href="#"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-meeru-orange text-white text-sm font-medium hover:bg-opacity-90 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-meeru-orange text-white text-sm font-medium hover:bg-meeru-orange/90 transition-colors shadow-sm hover:shadow"
           >
             Request a Demo <ArrowRight className="w-4 h-4" />
           </a>
           <a
             href="#"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-300 text-gray-700 text-sm font-medium hover:border-gray-400 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-300 text-gray-700 text-sm font-medium hover:border-gray-400 hover:bg-gray-50 transition-colors"
           >
             Explore the Workbenches <ArrowRight className="w-4 h-4" />
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <footer className="border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
@@ -55,19 +70,19 @@ export default function CTAFooterSection() {
             <div className="text-center">
               <h4 className="text-sm font-semibold text-gray-900 mb-4">Certifications</h4>
               <div className="flex items-center justify-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100">
+                <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100 hover:scale-105 transition-transform">
                   <span className="text-[8px] font-bold text-blue-600 text-center leading-tight">
                     AICPA
                     <br />
                     SOC
                   </span>
                 </div>
-                <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100">
+                <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100 hover:scale-105 transition-transform">
                   <span className="text-[8px] font-bold text-purple-600 text-center leading-tight">
                     GDPR
                   </span>
                 </div>
-                <div className="w-12 h-12 rounded-full bg-cyan-50 flex items-center justify-center border border-cyan-100">
+                <div className="w-12 h-12 rounded-full bg-cyan-50 flex items-center justify-center border border-cyan-100 hover:scale-105 transition-transform">
                   <span className="text-[8px] font-bold text-cyan-600 text-center leading-tight">
                     ISO
                   </span>
@@ -131,7 +146,7 @@ export default function CTAFooterSection() {
 
       <button
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-meeru-orange text-white flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-colors z-50"
+        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-meeru-orange text-white flex items-center justify-center shadow-lg hover:bg-meeru-orange/90 hover:scale-105 transition-all z-50"
         aria-label="Scroll to top"
       >
         <ArrowRight className="w-5 h-5 -rotate-90" />

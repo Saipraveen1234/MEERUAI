@@ -26,11 +26,15 @@ export default function MeeruFitsSection() {
             <div className="space-y-3 mt-10">
               <div className="rounded-xl border border-orange-200 bg-meeru-orange-light p-5 relative">
                 <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2.5 h-2.5 rounded-full bg-meeru-orange mt-1.5" />
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-4 rounded-sm bg-meeru-orange mt-1 shrink-0" />
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900">MeeruAI</h4>
-                      <p className="text-sm text-gray-600 mt-0.5">
+                      <img 
+                        src="/meeruai-logo.png" 
+                        alt="MeeruAI" 
+                        className="h-5 w-auto object-contain mb-1" 
+                      />
+                      <p className="text-sm text-gray-600">
                         System of action: What needs to happen next, and how work gets done.
                       </p>
                     </div>
@@ -78,10 +82,14 @@ export default function MeeruFitsSection() {
           </div>
 
           <div className="relative">
-            <div className="absolute -top-10 -right-20 text-[20rem] font-bold text-meeru-orange opacity-[0.06] leading-none select-none pointer-events-none">
-              M
+            <div className="absolute -top-12 right-0 w-[350px] opacity-[0.08] select-none pointer-events-none z-0">
+              <img 
+                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/meeru-m-coral.png" 
+                alt="" 
+                className="w-full h-auto object-contain"
+              />
             </div>
-            <div className="lg:pt-24">
+            <div className="lg:pt-24 relative z-10">
               <blockquote className="relative">
                 <p className="text-3xl lg:text-4xl font-light text-gray-900 leading-snug">
                   &ldquo;ERP records. BI reports.{" "}
