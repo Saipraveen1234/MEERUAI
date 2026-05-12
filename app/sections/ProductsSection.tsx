@@ -35,7 +35,7 @@ export default function ProductsSection() {
                 : "text-gray-600 hover:text-gray-900"
             }`}
           >
-            Performance AI Workbench
+            Performance AI Workbenchh
           </button>
         </div>
 
