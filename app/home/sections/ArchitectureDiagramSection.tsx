@@ -277,18 +277,20 @@ export default function ArchitectureDiagramSection() {
           </div>
 
           {/* Bottom: POWERED BY */}
-          <div className="relative z-10 mt-6 pt-5 border-t border-gray-200 flex items-center justify-center gap-4 flex-wrap">
-            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-400">
+          <div className="relative z-10 mt-6 pt-5 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase text-gray-400 mb-1 sm:mb-0">
               POWERED BY
             </span>
-            {["Agentic Suites™", "Autonomy Studio™", "Finance Command Center"].map((label) => (
-              <span
-                key={label}
-                className="px-3.5 py-1.5 rounded-full border border-meeru-orange/40 text-meeru-orange text-[11px] font-medium bg-white"
-              >
-                {label}
-              </span>
-            ))}
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              {["Agentic Suites™", "Autonomy Studio™", "Finance Command Center"].map((label) => (
+                <span
+                  key={label}
+                  className="px-3.5 py-1.5 rounded-full border border-meeru-orange/40 text-meeru-orange text-[11px] font-medium bg-white"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
           </div>
         </motion.div>
 
