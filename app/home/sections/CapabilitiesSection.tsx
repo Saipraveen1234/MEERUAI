@@ -68,7 +68,7 @@ export default function CapabilitiesSection() {
     <section className="relative w-full py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div
-          className="rounded-[2.5rem] p-10 lg:p-16 relative overflow-hidden"
+          className="rounded-[2.5rem] p-6 md:p-10 lg:p-16 relative overflow-hidden"
           style={{
             background: "linear-gradient(135deg, #d4d4d4 0%, #e8ddd4 40%, #f5d4c0 70%, #f0c4a8 100%)",
           }}
@@ -87,42 +87,39 @@ export default function CapabilitiesSection() {
             {capabilities.map((cap) => (
               <div
                 key={cap.num}
-                className="group bg-white/60 hover:bg-white/80 backdrop-blur-sm transition-colors duration-300 rounded-2xl p-8 flex flex-col min-h-[420px]"
+                className="group relative bg-white/60 hover:bg-white/80 backdrop-blur-sm transition-colors duration-300 rounded-2xl p-8 flex flex-col min-h-[300px] md:min-h-[420px] overflow-hidden"
               >
+                {/* Static top */}
                 <span className="text-meeru-orange text-sm font-medium mb-3">{cap.num}</span>
                 <h3 className="text-2xl font-medium text-gray-900 mb-2">{cap.title}</h3>
-                <p className="text-meeru-orange text-sm leading-relaxed">{cap.desc}</p>
+                <p className="text-meeru-orange text-sm leading-relaxed mb-4">{cap.desc}</p>
 
-                <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-500 ease-in-out">
-                  <div className="overflow-hidden">
-                    <div className="pt-5 pb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 flex flex-col gap-4">
-                      <p className="text-gray-800 text-[13px] leading-relaxed font-medium">
-                        {cap.hoverText}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {cap.pills.map((pill) => (
-                          <span 
-                            key={pill} 
-                            className="px-3 py-1 rounded-full border border-orange-200/60 text-meeru-orange text-[10px] tracking-wide font-medium bg-white/50"
-                          >
-                            {pill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                {/* Hover text + pills — visible by default on mobile, hover reveal on desktop */}
+                <div className="opacity-100 md:opacity-0 md:translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 delay-150 ease-in-out flex flex-col gap-4">
+                  <p className="text-gray-800 text-[13px] leading-relaxed">
+                    {cap.hoverText}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {cap.pills.map((pill) => (
+                      <span
+                        key={pill}
+                        className="px-3 py-1 rounded-full border border-gray-300 text-gray-600 text-[11px] tracking-wide font-medium bg-white/50"
+                      >
+                        {pill}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                <div className="mt-auto pt-10 flex items-end justify-between">
+                {/* SVG + Explore — slides right and fades out on hover (desktop only) */}
+                <div className="mt-auto flex items-end justify-between transition-all duration-500 ease-in-out md:group-hover:translate-x-[130%] md:group-hover:opacity-0">
                   <a
                     href="#"
-                    className="inline-flex items-center gap-2 text-meeru-orange text-sm font-medium hover:gap-3 transition-all"
+                    className="inline-flex items-center gap-2 text-meeru-orange text-sm font-medium"
                   >
                     Explore <ArrowRight className="w-4 h-4" />
                   </a>
-                  <div className="opacity-80 transition-transform duration-500 group-hover:scale-110 origin-bottom-right">
-                    {cap.icon}
-                  </div>
+                  <div>{cap.icon}</div>
                 </div>
               </div>
             ))}

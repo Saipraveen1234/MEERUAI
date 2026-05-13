@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { ArrowRight, Linkedin, Instagram, Youtube } from "lucide-react";
 import { motion } from "framer-motion";
+import DemoModal from "./DemoModal";
 
 export default function CTAFooterSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const scrollToTop = () => {
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -38,12 +42,12 @@ export default function CTAFooterSection() {
           with source-traced evidence, review, and audit-ready execution built in.
         </motion.p>
         <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow"
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow cursor-pointer"
           >
             Request a Demo <ArrowRight className="w-4 h-4" />
-          </a>
+          </button>
           <a
             href="#"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gray-200 text-gray-600 text-[15px] font-medium hover:border-gray-300 hover:bg-gray-50 transition-colors bg-white/50 backdrop-blur-sm"
@@ -55,7 +59,7 @@ export default function CTAFooterSection() {
 
       <footer className="relative border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="grid md:grid-cols-3 gap-12 items-start">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12 items-start">
             {/* Logo and Description */}
             <div>
               <div className="flex items-center mb-6">
@@ -66,7 +70,7 @@ export default function CTAFooterSection() {
                 />
                 <span className="text-[26px] font-bold tracking-tight text-gray-900 -ml-1">eeruAI</span>
               </div>
-              <p className="text-[13px] text-gray-500 leading-relaxed max-w-[280px]">
+              <p className="text-[13px] text-gray-500 leading-relaxed max-w-full md:max-w-[280px]">
                 MeeruAI helps finance teams complete high-stakes work with source-traced AI, from
                 accounting close to variance analysis to performance action.
               </p>
@@ -76,24 +80,21 @@ export default function CTAFooterSection() {
             <div>
               <h4 className="text-[15px] font-medium text-gray-900 mb-6">Certifications</h4>
               <div className="flex items-center gap-3">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#5DB4E5] to-[#3B8BEB] flex items-center justify-center text-white shadow-sm hover:scale-105 transition-transform relative overflow-hidden">
-                  <div className="absolute inset-0 bg-white/10 rounded-full border border-white/20"></div>
-                  <span className="text-[9px] font-bold text-center leading-tight tracking-wider z-10">
-                    AICPA<br />SOC
-                  </span>
-                </div>
-                <div className="w-14 h-14 rounded-full bg-[#3B4C85] flex flex-col items-center justify-center text-white shadow-sm hover:scale-105 transition-transform border border-white/20 relative overflow-hidden">
-                  <div className="absolute w-full h-full border-[3px] border-dashed border-[#C5A866] rounded-full opacity-60 scale-90"></div>
-                  <span className="text-[10px] font-bold text-center leading-tight tracking-wider z-10">
-                    GDPR
-                  </span>
-                </div>
-                <div className="w-14 h-14 rounded-full bg-[#4682E8] flex items-center justify-center text-white shadow-sm hover:scale-105 transition-transform border border-white/20 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-white/10 rounded-full border border-white/20"></div>
-                  <span className="text-[14px] font-bold tracking-widest z-10">
-                    ISO
-                  </span>
-                </div>
+                <img
+                  src="/SOC-logo.png"
+                  alt="AICPA SOC Certification"
+                  className="w-14 h-14 object-contain hover:scale-105 transition-transform"
+                />
+                <img
+                  src="/gdpr-logo.png"
+                  alt="GDPR Certification"
+                  className="w-14 h-14 object-contain hover:scale-105 transition-transform"
+                />
+                <img
+                  src="/iso-logo.png"
+                  alt="ISO Certification"
+                  className="w-14 h-14 object-contain hover:scale-105 transition-transform"
+                />
               </div>
             </div>
 
@@ -101,30 +102,18 @@ export default function CTAFooterSection() {
             <div>
               <h4 className="text-[15px] font-medium text-gray-900 mb-6">Follow Us</h4>
               <div className="flex items-center gap-3">
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm"
-                >
+                <a href="#" className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm">
                   <Linkedin className="w-4 h-4" />
                 </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm"
-                >
+                <a href="#" className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
                   </svg>
                 </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm"
-                >
+                <a href="#" className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm">
                   <Instagram className="w-4 h-4" />
                 </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm"
-                >
+                <a href="#" className="w-10 h-10 rounded-[10px] border border-gray-200 bg-gray-50 flex items-center justify-center text-gray-500 hover:border-meeru-orange hover:text-meeru-orange hover:bg-white transition-all shadow-sm">
                   <Youtube className="w-4 h-4" />
                 </a>
               </div>
@@ -153,6 +142,8 @@ export default function CTAFooterSection() {
       >
         <ArrowRight className="w-5 h-5 -rotate-90" />
       </button>
+
+      <DemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

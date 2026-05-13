@@ -49,7 +49,7 @@ export default function MeeruFitsSection() {
                     <img src="/meeruai-logo.png" alt="MeeruAI" className="h-[22px] w-auto object-contain mb-3" />
                     <div className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-meeru-orange mt-1.5 shrink-0" />
-                      <p className="text-[11px] text-gray-600 leading-relaxed max-w-[220px]">
+                      <p className="text-[11px] text-gray-600 leading-relaxed max-w-full md:max-w-[220px]">
                         System of action: What needs to happen next, and how work gets done.
                       </p>
                     </div>
@@ -100,7 +100,7 @@ export default function MeeruFitsSection() {
 
           {/* Right Column (Quote Card) */}
           <div className="lg:w-[460px] lg:mt-8">
-            <div className="rounded-[1.5rem] border border-[#FF7448]/20 bg-white/90 backdrop-blur-sm p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+            <div className="rounded-[1.5rem] border border-[#FF7448]/20 bg-white/90 backdrop-blur-sm p-6 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <h3 className="text-[1.65rem] font-normal text-gray-900 leading-[1.3] tracking-tight mb-6">
                 "ERP records. BI reports. MeeruAI gets the work done."
               </h3>

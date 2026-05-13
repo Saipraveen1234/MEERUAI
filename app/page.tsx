@@ -1,13 +1,14 @@
-import Navbar from "./components/Navbar";
-import HeroSection from "./sections/HeroSection";
-import OpportunitySection from "./sections/OpportunitySection";
-import MeeruFitsSection from "./sections/MeeruFitsSection";
-import ArchitectureSection from "./sections/ArchitectureSection";
-import CapabilitiesSection from "./sections/CapabilitiesSection";
-import ProductsSection from "./sections/ProductsSection";
-import ProofPointsSection from "./sections/ProofPointsSection";
-import DifferenceSection from "./sections/DifferenceSection";
-import CTAFooterSection from "./sections/CTAFooterSection";
+import Navbar from "./shared/Navbar";
+import HeroSection from "./home/sections/HeroSection";
+import OpportunitySection from "./home/sections/OpportunitySection";
+import MeeruFitsSection from "./home/sections/MeeruFitsSection";
+import ArchitectureSection from "./home/sections/ArchitectureSection";
+import ArchitectureDiagramSection from "./home/sections/ArchitectureDiagramSection";
+import CapabilitiesSection from "./home/sections/CapabilitiesSection";
+import ProductsSection from "./home/sections/ProductsSection";
+import ProofPointsSection from "./home/sections/ProofPointsSection";
+import DifferenceSection from "./home/sections/DifferenceSection";
+import CTAFooterSection from "./shared/CTAFooterSection";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <OpportunitySection />
         <MeeruFitsSection />
         <ArchitectureSection />
+        <ArchitectureDiagramSection />
         <CapabilitiesSection />
         <ProductsSection />
         <ProofPointsSection />

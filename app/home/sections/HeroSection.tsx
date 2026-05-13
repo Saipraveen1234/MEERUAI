@@ -83,7 +83,7 @@ export default function HeroSection() {
           >
             <motion.h1
               variants={fadeUp}
-              className="text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.1] text-gray-900"
+              className="text-4xl lg:text-5xl xl:text-6xl font-light leading-snug md:leading-[1.1] text-gray-900"
             >
               AI Workbenches for the Office of the CFO
             </motion.h1>

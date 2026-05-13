@@ -125,7 +125,7 @@ export default function OpportunitySection() {
             <p className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4">
               THE OPPORTUNITY
             </p>
-            <h2 className="text-[2.5rem] md:text-[3.2rem] font-light text-gray-900 leading-[1.15]">
+            <h2 className="text-3xl md:text-[2.5rem] lg:text-[3.2rem] font-light text-gray-900 leading-[1.15]">
               Finance has more tools than ever,{" "}
               <span className="block">yet the work is still manual.</span>
             </h2>
@@ -154,14 +154,13 @@ export default function OpportunitySection() {
           {/* Card 1 */}
           <motion.article
             variants={itemVariants}
-            className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A]"
-            style={{ aspectRatio: "4/5" }}
+            className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A] aspect-[16/10] sm:aspect-[4/5]"
             tabIndex={0}
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
               <img 
-                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img1.jpg" 
-                alt="Close Faster" 
+                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img1.jpg"
+                alt="Close Faster"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -171,7 +170,7 @@ export default function OpportunitySection() {
                 background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 40%, transparent 100%)",
               }}
             />
-            
+
             {/* Front State */}
             <div className="absolute inset-0 p-6 flex flex-col justify-end transition-opacity duration-500 group-hover:opacity-0">
               <div>
@@ -205,8 +204,7 @@ export default function OpportunitySection() {
           {/* Card 2 */}
           <motion.article
             variants={itemVariants}
-            className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A]"
-            style={{ aspectRatio: "4/5" }}
+            className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A] aspect-[16/10] sm:aspect-[4/5]"
             tabIndex={0}
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
@@ -256,8 +254,7 @@ export default function OpportunitySection() {
           {/* Card 3 */}
           <motion.article
             variants={itemVariants}
-            className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A]"
-            style={{ aspectRatio: "4/5" }}
+            className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A] aspect-[16/10] sm:aspect-[4/5]"
             tabIndex={0}
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">

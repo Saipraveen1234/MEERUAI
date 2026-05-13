@@ -11,7 +11,7 @@ export default function ProofPointsSection() {
           Early proof that the model works
         </h2>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-8 lg:p-12 mb-8 relative">
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8 lg:p-12 mb-8 relative">
           <span className="absolute top-6 left-6 text-6xl text-meeru-orange leading-none font-serif">
             &ldquo;
           </span>

@@ -80,13 +80,14 @@ export default function DifferenceSection() {
               <span className="text-xs text-gray-400 font-medium transition-all">{slideCounter}</span>
             </div>
 
-            <div className="divide-y divide-gray-50 flex-1">
+            <div className="divide-y-2 divide-gray-100 flex-1">
               <AnimatePresence initial={false}>
                 {visibleLedgerItems.map((item) => (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
                     className="flex items-center justify-between px-6 py-4 overflow-hidden bg-white"
                   >
                     <div className="flex items-center gap-4">
@@ -132,9 +133,9 @@ export default function DifferenceSection() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
                 >
                   <h3 className="text-[32px] lg:text-4xl font-light text-gray-900 mb-6 leading-tight">

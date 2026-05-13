@@ -3,17 +3,19 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import DemoModal from "./DemoModal";
 
 const navLinks = [
-  { label: "Home", href: "#" },
+  { label: "Home", href: "/" },
   { label: "Product", href: "#products" },
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -67,9 +69,12 @@ export default function Navbar() {
                     transition={{ duration: 0.2 }}
                     className="absolute top-full left-0 mt-4 w-48 bg-white rounded-xl border border-gray-100 shadow-xl py-2"
                   >
+                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Careers</a>
                     <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Blog</a>
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Case Studies</a>
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Documentation</a>
+                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Podcast</a>
+                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Vocabulary</a>
+                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Events</a>
+                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">White Papers</a>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -77,12 +82,12 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-meeru-orange text-white text-sm font-medium hover:bg-meeru-orange/90 transition-colors shadow-sm hover:shadow"
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-meeru-orange text-white text-sm font-medium hover:bg-meeru-orange/90 transition-colors shadow-sm hover:shadow cursor-pointer"
             >
               Request a Demo <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
 
           <button
@@ -118,17 +123,22 @@ export default function Navbar() {
                 <a href="#" className="text-base font-medium text-gray-600 hover:text-meeru-orange transition-colors">
                   Resources
                 </a>
-                <a
-                  href="#"
-                  className="inline-flex justify-center items-center gap-2 px-5 py-3 rounded-xl bg-meeru-orange text-white text-sm font-medium"
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    setIsModalOpen(true);
+                  }}
+                  className="inline-flex justify-center items-center gap-2 px-5 py-3 rounded-xl bg-meeru-orange text-white text-sm font-medium cursor-pointer w-full"
                 >
                   Request a Demo <ArrowRight className="w-4 h-4" />
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <DemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
