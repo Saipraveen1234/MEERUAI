@@ -1,8 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+
+const SUBHEADLINE = "Close faster. Explain every variance. Act with confidence.";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -10,6 +13,34 @@ const fadeUp = {
 };
 
 export default function HeroSection() {
+  const [typedText, setTypedText] = useState("");
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  // Start typing after the heading fades in
+  useEffect(() => {
+    const timer = setTimeout(() => setHasStarted(true), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Typing effect
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= SUBHEADLINE.length) {
+        setTypedText(SUBHEADLINE.substring(0, index));
+        index++;
+      } else {
+        setIsTypingComplete(true);
+        clearInterval(timer);
+      }
+    }, 40);
+
+    return () => clearInterval(timer);
+  }, [hasStarted]);
+
   return (
     <section className="relative w-full bg-white pt-24 lg:pt-32 pb-16 lg:pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -27,12 +58,14 @@ export default function HeroSection() {
               AI Workbenches for the Office of the CFO
             </motion.h1>
 
-            <motion.p
-              variants={fadeUp}
-              className="text-xl lg:text-2xl text-gray-500 font-light leading-relaxed"
-            >
-              Close faster. Explain every variance. Act with confidence.
-            </motion.p>
+            <motion.div variants={fadeUp} className="relative min-h-[2.5rem]">
+              <p className="text-xl lg:text-2xl text-gray-500 font-light leading-relaxed">
+                <span>{typedText}</span>
+                {!isTypingComplete && (
+                  <span className="inline-block w-[2px] h-[1em] bg-meeru-orange ml-[2px] align-middle animate-pulse" />
+                )}
+              </p>
+            </motion.div>
 
             <motion.div variants={fadeUp} className="w-12 h-1 bg-meeru-orange rounded-full" />
 
