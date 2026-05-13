@@ -21,6 +21,29 @@ export default function HeroSection() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const subheadlineTarget = "Close faster. Explain every variance. Act with confidence.";
+  const [subheadText, setSubheadText] = useState("");
+  const [hasStartedSubhead, setHasStartedSubhead] = useState(false);
+
+  // Typewriter for the subheadline (runs once)
+  useEffect(() => {
+    const timer = setTimeout(() => setHasStartedSubhead(true), 600); // Start after fade-in
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!hasStartedSubhead) return;
+    
+    let timeout: NodeJS.Timeout;
+    if (subheadText.length < subheadlineTarget.length) {
+      timeout = setTimeout(() => {
+        setSubheadText(subheadlineTarget.substring(0, subheadText.length + 1));
+      }, 40);
+    }
+    return () => clearTimeout(timeout);
+  }, [subheadText, hasStartedSubhead]);
+
+  // Typewriter for the looping phrases
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     const currentPhrase = phrases[phraseIndex];
@@ -65,12 +88,21 @@ export default function HeroSection() {
               AI Workbenches for the Office of the CFO
             </motion.h1>
 
-            <motion.p
+            <motion.div
               variants={fadeUp}
-              className="text-xl lg:text-2xl text-gray-500 font-light leading-relaxed"
+              className="relative text-xl lg:text-2xl text-gray-500 font-light leading-relaxed"
             >
-              Close faster. Explain every variance. Act with confidence.
-            </motion.p>
+              {/* Invisible placeholder to reserve exact height and prevent layout shift */}
+              <p className="opacity-0 select-none pointer-events-none" aria-hidden="true">
+                {subheadlineTarget}
+              </p>
+              <p className="absolute top-0 left-0 w-full h-full">
+                <span>{subheadText}</span>
+                {subheadText.length < subheadlineTarget.length && (
+                  <span className="animate-[pulse_1s_ease-in-out_infinite] ml-[1px]">|</span>
+                )}
+              </p>
+            </motion.div>
 
             <motion.div variants={fadeUp} className="w-12 h-1 bg-meeru-orange rounded-full" />
 

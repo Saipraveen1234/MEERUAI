@@ -1,9 +1,52 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Gauge, Search, ShieldCheck } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, Variants } from "framer-motion";
 
 export default function OpportunitySection() {
+  const [bgPhase, setBgPhase] = useState("draw");
+
+  useEffect(() => {
+    const cycle = setInterval(() => {
+      setBgPhase("hide");
+      setTimeout(() => setBgPhase("draw"), 1000); 
+    }, 5000); 
+    return () => clearInterval(cycle);
+  }, []);
+
+  const svgVariants: Variants = {
+    hide: {},
+    draw: {
+      transition: { staggerChildren: 0.3 },
+    },
+  };
+
+  const lineVariants: Variants = {
+    hide: {
+      pathLength: 0,
+      opacity: 0,
+      transition: { duration: 0.8, ease: "easeInOut" },
+    },
+    draw: {
+      pathLength: 1,
+      opacity: 1,
+      transition: { duration: 1.5, ease: "easeOut" },
+    },
+  };
+
+  const circleVariants: Variants = {
+    hide: {
+      scale: 0,
+      opacity: 0,
+      transition: { duration: 0.5 },
+    },
+    draw: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.8, type: "spring", bounce: 0.4 },
+    },
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -34,25 +77,32 @@ export default function OpportunitySection() {
             backgroundSize: "56px 56px",
           }}
         />
-        <svg
+        <motion.svg
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 1600 900"
           preserveAspectRatio="xMaxYMid slice"
+          variants={svgVariants}
+          initial="draw"
+          animate={bgPhase}
         >
           <g>
-            <line x1="200" y1="900" x2="1500" y2="-100" stroke="rgba(226,106,69,0.25)" strokeWidth="1.8" />
-            <line x1="400" y1="900" x2="1700" y2="100" stroke="rgba(226,106,69,0.2)" strokeWidth="1.8" />
-            <line x1="600" y1="900" x2="1800" y2="200" stroke="rgba(226,106,69,0.18)" strokeWidth="1.8" />
-            <line x1="900" y1="900" x2="1900" y2="300" stroke="rgba(226,106,69,0.15)" strokeWidth="1.8" />
-            <line x1="1100" y1="900" x2="2000" y2="400" stroke="rgba(226,106,69,0.12)" strokeWidth="1.8" />
+            <motion.line variants={lineVariants} x1="200" y1="900" x2="1500" y2="-100" stroke="rgba(226,106,69,0.25)" strokeWidth="1.8" />
+            <motion.line variants={lineVariants} x1="400" y1="900" x2="1700" y2="100" stroke="rgba(226,106,69,0.2)" strokeWidth="1.8" />
+            <motion.line variants={lineVariants} x1="600" y1="900" x2="1800" y2="200" stroke="rgba(226,106,69,0.18)" strokeWidth="1.8" />
+            <motion.line variants={lineVariants} x1="900" y1="900" x2="1900" y2="300" stroke="rgba(226,106,69,0.15)" strokeWidth="1.8" />
+            <motion.line variants={lineVariants} x1="1100" y1="900" x2="2000" y2="400" stroke="rgba(226,106,69,0.12)" strokeWidth="1.8" />
+            
+            {/* Intersecting lines (top-left to bottom-right) */}
+            <motion.line variants={lineVariants} x1="700" y1="-100" x2="1700" y2="900" stroke="rgba(226,106,69,0.2)" strokeWidth="1.8" />
+            <motion.line variants={lineVariants} x1="1000" y1="-100" x2="2000" y2="900" stroke="rgba(226,106,69,0.15)" strokeWidth="1.8" />
           </g>
           <g>
-            <circle cx="1280" cy="320" r="6" fill="rgba(226,106,69,0.35)" />
-            <circle cx="1380" cy="540" r="4" fill="rgba(226,106,69,0.3)" />
-            <circle cx="1180" cy="180" r="5" fill="rgba(226,106,69,0.3)" />
-            <circle cx="1560" cy="700" r="5" fill="rgba(226,106,69,0.3)" />
+            <motion.circle variants={circleVariants} cx="1380" cy="260" r="32" fill="none" stroke="rgba(226,106,69,0.25)" strokeWidth="1.8" />
+            <motion.circle variants={circleVariants} cx="1380" cy="540" r="4" fill="rgba(226,106,69,0.3)" />
+            <motion.circle variants={circleVariants} cx="1180" cy="380" r="5" fill="rgba(226,106,69,0.3)" />
+            <motion.circle variants={circleVariants} cx="1560" cy="700" r="5" fill="rgba(226,106,69,0.3)" />
           </g>
-        </svg>
+        </motion.svg>
       </div>
 
       <div
