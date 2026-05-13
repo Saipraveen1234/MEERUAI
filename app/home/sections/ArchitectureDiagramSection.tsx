@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -72,6 +72,16 @@ function AnimatedDashedLine() {
 
 export default function ArchitectureDiagramSection() {
   const [activeRow, setActiveRow] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start 0.85", "start 0.35"],
+  });
+
+  const cardScale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
+  const cardRadius = useTransform(scrollYProgress, [0, 1], [28, 0]);
 
   useEffect(() => {
     const t = setInterval(() => setActiveRow((p) => (p + 1) % 4), 2500);
@@ -79,7 +89,14 @@ export default function ArchitectureDiagramSection() {
   }, []);
 
   return (
-    <section className="relative w-full bg-white py-20 lg:py-28 overflow-hidden">
+    <motion.section
+      ref={sectionRef}
+      className="relative w-full bg-white py-20 lg:py-28 overflow-hidden"
+      initial={{ opacity: 0, x: -64, y: 72, scale: 0.965 }}
+      whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
         {/* Header */}
@@ -104,12 +121,13 @@ export default function ArchitectureDiagramSection() {
 
         {/* Main diagram card */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-          className="rounded-3xl border border-gray-200 bg-[#FAFAFA] p-6 lg:p-8 shadow-sm relative overflow-hidden"
+          ref={cardRef}
+          className="border border-gray-200 bg-[#FAFAFA] p-6 lg:p-8 shadow-sm relative overflow-hidden"
           style={{
+            scale: cardScale,
+            borderRadius: cardRadius,
+            transformOrigin: "center top",
+            willChange: "transform, border-radius",
             backgroundImage: `
               linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
               linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px)
@@ -275,6 +293,6 @@ export default function ArchitectureDiagramSection() {
         </motion.div>
 
       </div>
-    </section>
+    </motion.section>
   );
 }

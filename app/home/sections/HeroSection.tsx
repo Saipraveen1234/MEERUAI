@@ -1,15 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-
-const phrases = [
-  "From accounting close to performance action.",
-  "Understand every variance. Complete every workflow.",
-  "Source-traced AI for the Office of the CFO."
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -17,60 +10,6 @@ const fadeUp = {
 };
 
 export default function HeroSection() {
-  const [text, setText] = useState("");
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const subheadlineTarget = "Close faster. Explain every variance. Act with confidence.";
-  const [subheadText, setSubheadText] = useState("");
-  const [hasStartedSubhead, setHasStartedSubhead] = useState(false);
-
-  // Typewriter for the subheadline (runs once)
-  useEffect(() => {
-    const timer = setTimeout(() => setHasStartedSubhead(true), 600); // Start after fade-in
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (!hasStartedSubhead) return;
-    
-    let timeout: NodeJS.Timeout;
-    if (subheadText.length < subheadlineTarget.length) {
-      timeout = setTimeout(() => {
-        setSubheadText(subheadlineTarget.substring(0, subheadText.length + 1));
-      }, 40);
-    }
-    return () => clearTimeout(timeout);
-  }, [subheadText, hasStartedSubhead]);
-
-  // Typewriter for the looping phrases
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    const currentPhrase = phrases[phraseIndex];
-    
-    if (isDeleting) {
-      timeout = setTimeout(() => {
-        setText(currentPhrase.substring(0, text.length - 1));
-        if (text.length <= 1) {
-          setIsDeleting(false);
-          setPhraseIndex((prev) => (prev + 1) % phrases.length);
-        }
-      }, 20);
-    } else {
-      if (text.length === currentPhrase.length) {
-        timeout = setTimeout(() => {
-          setIsDeleting(true);
-        }, 3000);
-      } else {
-        timeout = setTimeout(() => {
-          setText(currentPhrase.substring(0, text.length + 1));
-        }, 45);
-      }
-    }
-    
-    return () => clearTimeout(timeout);
-  }, [text, isDeleting, phraseIndex]);
-
   return (
     <section className="relative w-full bg-white pt-24 lg:pt-32 pb-16 lg:pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -88,34 +27,19 @@ export default function HeroSection() {
               AI Workbenches for the Office of the CFO
             </motion.h1>
 
-            <motion.div
+            <motion.p
               variants={fadeUp}
-              className="relative text-xl lg:text-2xl text-gray-500 font-light leading-relaxed"
+              className="text-xl lg:text-2xl text-gray-500 font-light leading-relaxed"
             >
-              {/* Invisible placeholder to reserve exact height and prevent layout shift */}
-              <p className="opacity-0 select-none pointer-events-none" aria-hidden="true">
-                {subheadlineTarget}
-              </p>
-              <p className="absolute top-0 left-0 w-full h-full">
-                <span>{subheadText}</span>
-                {subheadText.length < subheadlineTarget.length && (
-                  <span className="animate-[pulse_1s_ease-in-out_infinite] ml-[1px]">|</span>
-                )}
-              </p>
-            </motion.div>
+              Close faster. Explain every variance. Act with confidence.
+            </motion.p>
 
             <motion.div variants={fadeUp} className="w-12 h-1 bg-meeru-orange rounded-full" />
 
-            <motion.div variants={fadeUp} className="text-[14px] lg:text-[15px] text-gray-500 leading-relaxed max-w-lg min-h-[90px]">
-              <div>
-                <span>{text}</span>
-                <span className="animate-[pulse_1s_ease-in-out_infinite] ml-[1px]">|</span>
-              </div>
-              <p>
-                MeeruAI helps finance teams complete high-stakes work with source-traced AI, from
-                accounting close to variance analysis to performance action.
-              </p>
-            </motion.div>
+            <motion.p variants={fadeUp} className="text-[14px] lg:text-[15px] text-gray-500 leading-relaxed max-w-lg">
+              MeeruAI helps finance teams complete high-stakes work with source-traced AI, from
+              accounting close to variance analysis to performance action.
+            </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
               <a

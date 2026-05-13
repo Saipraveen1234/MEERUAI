@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, Variants } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 
 export default function OpportunitySection() {
   const [bgPhase, setBgPhase] = useState("draw");
@@ -9,10 +9,18 @@ export default function OpportunitySection() {
   useEffect(() => {
     const cycle = setInterval(() => {
       setBgPhase("hide");
-      setTimeout(() => setBgPhase("draw"), 1000); 
-    }, 5000); 
+      setTimeout(() => setBgPhase("draw"), 1000);
+    }, 5000);
     return () => clearInterval(cycle);
   }, []);
+
+  // Scroll-driven scale for the entire cards grid
+  const gridRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: gridRef,
+    offset: ["start end", "end start"],
+  });
+  const gridScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
 
   const svgVariants: Variants = {
     hide: {},
@@ -47,26 +55,43 @@ export default function OpportunitySection() {
     },
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const sectionVariants = {
+    hidden: {
+      opacity: 0,
+      x: -64,
+      y: 72,
+      scale: 0.965,
+    },
     visible: {
       opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
       transition: {
-        staggerChildren: 0.15,
+        duration: 1.2,
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
   };
 
-  const itemVariants = {
+  const textVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    },
   };
 
   return (
-    <section
+    <motion.section
       className="relative py-24 border-t border-gray-100 overflow-hidden"
       style={{ backgroundColor: "rgba(249,249,248,0.6)" }}
       aria-label="The Opportunity"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={sectionVariants}
     >
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
@@ -91,7 +116,7 @@ export default function OpportunitySection() {
             <motion.line variants={lineVariants} x1="600" y1="900" x2="1800" y2="200" stroke="rgba(226,106,69,0.18)" strokeWidth="1.8" />
             <motion.line variants={lineVariants} x1="900" y1="900" x2="1900" y2="300" stroke="rgba(226,106,69,0.15)" strokeWidth="1.8" />
             <motion.line variants={lineVariants} x1="1100" y1="900" x2="2000" y2="400" stroke="rgba(226,106,69,0.12)" strokeWidth="1.8" />
-            
+
             {/* Intersecting lines (top-left to bottom-right) */}
             <motion.line variants={lineVariants} x1="700" y1="-100" x2="1700" y2="900" stroke="rgba(226,106,69,0.2)" strokeWidth="1.8" />
             <motion.line variants={lineVariants} x1="1000" y1="-100" x2="2000" y2="900" stroke="rgba(226,106,69,0.15)" strokeWidth="1.8" />
@@ -114,14 +139,8 @@ export default function OpportunitySection() {
       />
 
       <div className="max-w-6xl mx-auto px-5 relative z-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-          className="grid md:grid-cols-2 gap-12 mb-14"
-        >
-          <motion.div variants={itemVariants}>
+        <div className="grid md:grid-cols-2 gap-12 mb-14">
+          <motion.div variants={textVariants}>
             <p className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4">
               THE OPPORTUNITY
             </p>
@@ -130,7 +149,7 @@ export default function OpportunitySection() {
               <span className="block">yet the work is still manual.</span>
             </h2>
           </motion.div>
-          <motion.div variants={itemVariants} className="flex flex-col justify-end gap-3 text-sm text-gray-600 leading-relaxed">
+          <motion.div variants={textVariants} className="flex flex-col justify-end gap-3 text-sm text-gray-600 leading-relaxed">
             <p>
               ERP records the numbers. BI reports what happened. Close tools track the
               process. Generic AI drafts the commentary. MeeruAI helps finance finish the
@@ -142,23 +161,20 @@ export default function OpportunitySection() {
               experience.
             </p>
           </motion.div>
-        </motion.div>
+        </div>
 
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={containerVariants}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          ref={gridRef}
+          style={{ scale: gridScale }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 will-change-transform"
         >
           {/* Card 1 */}
-          <motion.article
-            variants={itemVariants}
+          <article
             className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A] aspect-[16/10] sm:aspect-[4/5]"
             tabIndex={0}
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
-              <img 
+              <img
                 src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img1.jpg"
                 alt="Close Faster"
                 className="w-full h-full object-cover"
@@ -199,18 +215,17 @@ export default function OpportunitySection() {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </article>
 
           {/* Card 2 */}
-          <motion.article
-            variants={itemVariants}
+          <article
             className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A] aspect-[16/10] sm:aspect-[4/5]"
             tabIndex={0}
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
-              <img 
-                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img2.jpg" 
-                alt="Resolve Issues Sooner" 
+              <img
+                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img2.jpg"
+                alt="Resolve Issues Sooner"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -220,7 +235,7 @@ export default function OpportunitySection() {
                 background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 40%, transparent 100%)",
               }}
             />
-            
+
             {/* Front State */}
             <div className="absolute inset-0 p-6 flex flex-col justify-end transition-opacity duration-500 group-hover:opacity-0">
               <div>
@@ -249,18 +264,17 @@ export default function OpportunitySection() {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </article>
 
           {/* Card 3 */}
-          <motion.article
-            variants={itemVariants}
+          <article
             className="relative rounded-2xl overflow-hidden group cursor-pointer border border-transparent hover:border-meeru-orange/50 transition-colors duration-500 bg-[#1A1A1A] aspect-[16/10] sm:aspect-[4/5]"
             tabIndex={0}
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
-              <img 
-                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img3.jpg" 
-                alt="Act with Confidence" 
+              <img
+                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img3.jpg"
+                alt="Act with Confidence"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -270,7 +284,7 @@ export default function OpportunitySection() {
                 background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 40%, transparent 100%)",
               }}
             />
-            
+
             {/* Front State */}
             <div className="absolute inset-0 p-6 flex flex-col justify-end transition-opacity duration-500 group-hover:opacity-0">
               <div>
@@ -299,9 +313,9 @@ export default function OpportunitySection() {
                 ))}
               </ul>
             </div>
-          </motion.article>
+          </article>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

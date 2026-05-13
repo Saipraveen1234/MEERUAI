@@ -3,7 +3,7 @@
 import { ArrowRight, Sparkles, Radio, CheckSquare } from "lucide-react";
 
 const StarburstIcon = () => (
-  <svg className="w-16 h-16 text-gray-800" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round">
+  <svg className="w-28 h-28 text-gray-800" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round">
     {[...Array(16)].map((_, i) => {
       const angle = (i * Math.PI) / 8;
       const isLong = i % 2 === 0;
@@ -19,7 +19,7 @@ const StarburstIcon = () => (
 );
 
 const RadioIcon = () => (
-  <svg className="w-16 h-16 text-gray-800" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round">
+  <svg className="w-28 h-28 text-gray-800" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round">
     <circle cx="24" cy="42" r="1.5" />
     <circle cx="24" cy="34" r="3.5" />
     <circle cx="24" cy="22" r="5.5" />
@@ -29,7 +29,7 @@ const RadioIcon = () => (
 );
 
 const CheckIcon = () => (
-  <svg className="w-16 h-16 text-gray-800" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-28 h-28 text-gray-800" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
     <rect x="12" y="10" width="22" height="28" rx="2" />
     <path d="M18 24 L22 28 L30 18" />
     <circle cx="38" cy="36" r="3.5" fill="currentColor" stroke="none" />

@@ -1,8 +1,53 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
+
+const QUOTE_TEXT = "ERP records. BI reports. MeeruAI gets the work done.";
+
 export default function MeeruFitsSection() {
+  const [typedText, setTypedText] = useState("");
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Intersection Observer to trigger typing when section is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Typing effect
+  useEffect(() => {
+    if (!isInView) return;
+
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= QUOTE_TEXT.length) {
+        setTypedText(QUOTE_TEXT.substring(0, index));
+        index++;
+      } else {
+        setIsTypingComplete(true);
+        clearInterval(timer);
+      }
+    }, 45);
+
+    return () => clearInterval(timer);
+  }, [isInView]);
+
   return (
-    <section className="relative w-full bg-white py-20 lg:py-32 overflow-hidden">
+    <section ref={sectionRef} className="relative w-full bg-white py-20 lg:py-32 overflow-hidden">
       {/* Background M Logo with Glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[800px] pointer-events-none z-0">
         {/* Soft radial glow */}
@@ -101,8 +146,12 @@ export default function MeeruFitsSection() {
           {/* Right Column (Quote Card) */}
           <div className="lg:w-[460px] lg:mt-8">
             <div className="rounded-[1.5rem] border border-[#FF7448]/20 bg-white/90 backdrop-blur-sm p-6 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-              <h3 className="text-[1.65rem] font-normal text-gray-900 leading-[1.3] tracking-tight mb-6">
-                "ERP records. BI reports. MeeruAI gets the work done."
+              <h3 className="text-[1.65rem] font-normal text-gray-900 leading-[1.3] tracking-tight mb-6 min-h-[3.5rem]">
+                <span className="text-gray-900">"{typedText}</span>
+                {!isTypingComplete && (
+                  <span className="inline-block w-[2px] h-[1.2em] bg-meeru-orange ml-[1px] align-middle animate-pulse" />
+                )}
+                <span className="text-gray-900">"</span>
               </h3>
               <p className="text-[13px] leading-relaxed text-gray-600">
                 For the first time, finance has a system that goes beyond visibility. It
