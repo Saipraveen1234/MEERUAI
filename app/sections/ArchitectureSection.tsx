@@ -9,7 +9,7 @@ export default function ArchitectureSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCoreIndex((prev) => (prev + 1) % 4);
-    }, 2500); // cycle every 2.5 seconds
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
