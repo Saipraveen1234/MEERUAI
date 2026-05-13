@@ -1,8 +1,15 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+
+const phrases = [
+  "From accounting close to performance action.",
+  "Understand every variance. Complete every workflow.",
+  "Source-traced AI for the Office of the CFO."
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -10,6 +17,37 @@ const fadeUp = {
 };
 
 export default function HeroSection() {
+  const [text, setText] = useState("");
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+      timeout = setTimeout(() => {
+        setText(currentPhrase.substring(0, text.length - 1));
+        if (text.length <= 1) {
+          setIsDeleting(false);
+          setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        }
+      }, 20);
+    } else {
+      if (text.length === currentPhrase.length) {
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, 3000);
+      } else {
+        timeout = setTimeout(() => {
+          setText(currentPhrase.substring(0, text.length + 1));
+        }, 45);
+      }
+    }
+    
+    return () => clearTimeout(timeout);
+  }, [text, isDeleting, phraseIndex]);
+
   return (
     <section className="relative w-full bg-white pt-24 lg:pt-32 pb-16 lg:pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -36,22 +74,27 @@ export default function HeroSection() {
 
             <motion.div variants={fadeUp} className="w-12 h-1 bg-meeru-orange rounded-full" />
 
-            <motion.p variants={fadeUp} className="text-gray-600 leading-relaxed max-w-lg">
-              From accounting close to performance action. MeeruAI helps finance teams complete
-              high-stakes work with source-traced AI, from accounting close to variance analysis to
-              performance action.
-            </motion.p>
+            <motion.div variants={fadeUp} className="text-[14px] lg:text-[15px] text-gray-500 leading-relaxed max-w-lg min-h-[90px]">
+              <div>
+                <span>{text}</span>
+                <span className="animate-[pulse_1s_ease-in-out_infinite] ml-[1px]">|</span>
+              </div>
+              <p>
+                MeeruAI helps finance teams complete high-stakes work with source-traced AI, from
+                accounting close to variance analysis to performance action.
+              </p>
+            </motion.div>
 
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
               <a
                 href="#"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-meeru-orange text-white text-sm font-medium hover:bg-meeru-orange/90 transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow"
               >
                 Request a Demo <ArrowRight className="w-4 h-4" />
               </a>
               <a
                 href="#"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-300 text-gray-700 text-sm font-medium hover:border-gray-400 hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gray-200 text-gray-600 text-[15px] font-medium hover:border-gray-300 hover:bg-gray-50 transition-colors bg-white/50 backdrop-blur-sm"
               >
                 Explore the Workbenches <ArrowRight className="w-4 h-4" />
               </a>

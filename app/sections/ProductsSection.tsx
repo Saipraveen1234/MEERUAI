@@ -305,6 +305,37 @@ export default function ProductsSection() {
             </div>
           </motion.div>
         </div>
+
+        {/* Finance Command Center Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-8 lg:mt-12 rounded-xl bg-[#F8F8F8] p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-gray-100"
+        >
+          <div className="space-y-4">
+            <div>
+              <span className="text-[10px] font-bold tracking-[0.15em] text-gray-400 uppercase">
+                SPANNING BOTH
+              </span>
+              <h3 className="text-xl font-medium text-gray-900 mt-1">
+                Finance command center
+              </h3>
+            </div>
+            <div className="flex flex-wrap gap-2.5">
+              <span className="px-3 py-1.5 bg-[#FFF5F0] text-meeru-orange rounded-md text-[11px] font-semibold tracking-wide">
+                Close AI Workbench
+              </span>
+              <span className="px-3 py-1.5 bg-[#FFF5F0] text-meeru-orange rounded-md text-[11px] font-semibold tracking-wide">
+                Performance AI Workbench
+              </span>
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 leading-relaxed max-w-xs md:max-w-sm md:text-left">
+            One unified view of your finance operations across both workbenches.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
