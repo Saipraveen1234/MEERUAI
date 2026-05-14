@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { X, ArrowRight } from "lucide-react";
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xqawpyrb";
 
 interface DemoModalProps {
   isOpen: boolean;
@@ -18,6 +21,7 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
     role: "",
     whatToSee: "",
   });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
     if (isOpen) {
@@ -30,22 +34,48 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      setStatus("idle");
+      setFormData({ firstName: "", lastName: "", workEmail: "", phone: "", company: "", role: "", whatToSee: "" });
+    }
+  }, [isOpen]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Hook up to your backend / form service
-    alert("Thank you! We'll be in touch within one business day.");
-    onClose();
+    setStatus("loading");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.workEmail,
+          phone: formData.phone,
+          company: formData.company,
+          role: formData.role,
+          message: formData.whatToSee,
+        }),
+      });
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
       {/* Backdrop */}
       <div
@@ -64,6 +94,26 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
           <X className="w-5 h-5" />
         </button>
 
+        {status === "success" ? (
+          <div className="py-10 text-center space-y-4">
+            <div className="w-14 h-14 rounded-full bg-[#FF7448]/10 flex items-center justify-center mx-auto">
+              <svg className="w-7 h-7 text-[#FF7448]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-medium text-gray-900">Request received!</h2>
+            <p className="text-[15px] text-gray-500 leading-relaxed">
+              We'll be in touch within one business day.
+            </p>
+            <button
+              onClick={onClose}
+              className="mt-4 inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        ) : (
+          <>
         {/* Header */}
         <h2 className="text-2xl font-medium text-gray-900 mb-2">
           Request a Demo
@@ -72,6 +122,13 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
           See MeeruAI on your own finance data. We'll be in touch within one
           business day.
         </p>
+
+        {status === "error" && (
+          <p className="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg px-4 py-3 mb-5">
+            Something went wrong. Please try again or email us at{" "}
+            <a href="mailto:contact@meeru.ai" className="underline">contact@meeru.ai</a>.
+          </p>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -192,12 +249,16 @@ export default function DemoModal({ isOpen, onClose }: DemoModalProps) {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow"
+            disabled={status === "loading"}
+            className="w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Request a Demo <ArrowRight className="w-4 h-4" />
+            {status === "loading" ? "Sending…" : <> Request a Demo <ArrowRight className="w-4 h-4" /> </>}
           </button>
         </form>
+          </>
+        )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

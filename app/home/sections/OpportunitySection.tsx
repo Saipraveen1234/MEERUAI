@@ -1,18 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function OpportunitySection() {
-  const [bgPhase, setBgPhase] = useState("draw");
-
-  useEffect(() => {
-    const cycle = setInterval(() => {
-      setBgPhase("hide");
-      setTimeout(() => setBgPhase("draw"), 1000);
-    }, 5000);
-    return () => clearInterval(cycle);
-  }, []);
+  const [isInView, setIsInView] = useState(false);
 
   // Scroll-driven scale for the entire cards grid
   const gridRef = useRef<HTMLDivElement>(null);
@@ -21,39 +13,6 @@ export default function OpportunitySection() {
     offset: ["start end", "end start"],
   });
   const gridScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 0.9]);
-
-  const svgVariants: Variants = {
-    hide: {},
-    draw: {
-      transition: { staggerChildren: 0.3 },
-    },
-  };
-
-  const lineVariants: Variants = {
-    hide: {
-      pathLength: 0,
-      opacity: 0,
-      transition: { duration: 0.8, ease: "easeInOut" },
-    },
-    draw: {
-      pathLength: 1,
-      opacity: 1,
-      transition: { duration: 1.5, ease: "easeOut" },
-    },
-  };
-
-  const circleVariants: Variants = {
-    hide: {
-      scale: 0,
-      opacity: 0,
-      transition: { duration: 0.5 },
-    },
-    draw: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.8, type: "spring", bounce: 0.4 },
-    },
-  };
 
   const sectionVariants = {
     hidden: {
@@ -85,51 +44,48 @@ export default function OpportunitySection() {
 
   return (
     <motion.section
-      className="relative py-24 border-t border-gray-100 overflow-hidden"
+      className={`relative py-24 border-t border-gray-100 overflow-hidden ${
+        isInView ? "opportunity-float" : ""
+      }`}
       style={{ backgroundColor: "rgba(249,249,248,0.6)" }}
       aria-label="The Opportunity"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={sectionVariants}
+      onViewportEnter={() => setIsInView(true)}
     >
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(226,106,69,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(226,106,69,0.12) 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-          }}
-        />
-        <motion.svg
-          className="absolute inset-0 w-full h-full"
+      {/* Blueprint background — exact WordPress structure */}
+      <div className="blueprint-decor" aria-hidden="true">
+        <div className="blueprint-grid" />
+        <svg
+          className="blueprint-svg"
           viewBox="0 0 1600 900"
           preserveAspectRatio="xMaxYMid slice"
-          variants={svgVariants}
-          initial="draw"
-          animate={bgPhase}
         >
-          <g>
-            <motion.line variants={lineVariants} x1="200" y1="900" x2="1500" y2="-100" stroke="rgba(226,106,69,0.25)" strokeWidth="1.8" />
-            <motion.line variants={lineVariants} x1="400" y1="900" x2="1700" y2="100" stroke="rgba(226,106,69,0.2)" strokeWidth="1.8" />
-            <motion.line variants={lineVariants} x1="600" y1="900" x2="1800" y2="200" stroke="rgba(226,106,69,0.18)" strokeWidth="1.8" />
-            <motion.line variants={lineVariants} x1="900" y1="900" x2="1900" y2="300" stroke="rgba(226,106,69,0.15)" strokeWidth="1.8" />
-            <motion.line variants={lineVariants} x1="1100" y1="900" x2="2000" y2="400" stroke="rgba(226,106,69,0.12)" strokeWidth="1.8" />
-
-            {/* Intersecting lines (top-left to bottom-right) */}
-            <motion.line variants={lineVariants} x1="700" y1="-100" x2="1700" y2="900" stroke="rgba(226,106,69,0.2)" strokeWidth="1.8" />
-            <motion.line variants={lineVariants} x1="1000" y1="-100" x2="2000" y2="900" stroke="rgba(226,106,69,0.15)" strokeWidth="1.8" />
+          <g className="bp-lines">
+            <line x1="200" y1="900" x2="1500" y2="-100" className="bp-line bp-l1" />
+            <line x1="400" y1="900" x2="1700" y2="100" className="bp-line bp-l2" />
+            <line x1="600" y1="900" x2="1800" y2="200" className="bp-line bp-l3" />
+            <line x1="900" y1="900" x2="1900" y2="300" className="bp-line bp-l4" />
+            <line x1="1100" y1="900" x2="2000" y2="400" className="bp-line bp-l5" />
+            <line x1="800" y1="-50" x2="1750" y2="950" className="bp-line bp-l6" />
+            <line x1="1000" y1="-50" x2="1900" y2="950" className="bp-line bp-l7" />
+            <line x1="1450" y1="0" x2="1450" y2="900" className="bp-line bp-vert" />
+            <line x1="1520" y1="0" x2="1520" y2="900" className="bp-line bp-vert bp-vert-2" />
           </g>
-          <g>
-            <motion.circle variants={circleVariants} cx="1380" cy="260" r="32" fill="none" stroke="rgba(226,106,69,0.25)" strokeWidth="1.8" />
-            <motion.circle variants={circleVariants} cx="1380" cy="540" r="4" fill="rgba(226,106,69,0.3)" />
-            <motion.circle variants={circleVariants} cx="1180" cy="380" r="5" fill="rgba(226,106,69,0.3)" />
-            <motion.circle variants={circleVariants} cx="1560" cy="700" r="5" fill="rgba(226,106,69,0.3)" />
+          <g className="bp-nodes">
+            <circle cx="1280" cy="320" r="6" className="bp-node bp-node-1" />
+            <circle cx="1380" cy="540" r="4" className="bp-node bp-node-2" />
+            <circle cx="1180" cy="180" r="5" className="bp-node bp-node-3" />
+            <circle cx="1560" cy="700" r="5" className="bp-node bp-node-4" />
+            <circle cx="1080" cy="640" r="3" className="bp-node bp-node-5" />
+            <circle cx="1450" cy="240" r="14" className="bp-ring" />
           </g>
-        </motion.svg>
+        </svg>
       </div>
 
+      {/* Top gradient line */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
@@ -175,7 +131,7 @@ export default function OpportunitySection() {
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
               <img
-                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img1.jpg"
+                src="/opportunity-card-1.jpg"
                 alt="Close Faster"
                 className="w-full h-full object-cover"
               />
@@ -224,7 +180,7 @@ export default function OpportunitySection() {
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
               <img
-                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img2.jpg"
+                src="/opportunity-card-2.jpg"
                 alt="Resolve Issues Sooner"
                 className="w-full h-full object-cover"
               />
@@ -273,7 +229,7 @@ export default function OpportunitySection() {
           >
             <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-10">
               <img
-                src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/The-Opportunity-card-img3.jpg"
+                src="/opportunity-card-3.jpg"
                 alt="Act with Confidence"
                 className="w-full h-full object-cover"
               />

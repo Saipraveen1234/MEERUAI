@@ -176,7 +176,7 @@ export default function ArchitectureDiagramSection() {
               <div className="flex justify-center h-[34px] items-center mb-1">
                 <div className="flex items-center gap-1">
                   <img
-                    src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/meeru-m-coral.png"
+                    src="/meeru-m-coral.png"
                     alt="M"
                     className="h-8 w-auto object-contain"
                   />

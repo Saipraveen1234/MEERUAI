@@ -1,14 +1,32 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 const QUOTE_TEXT = "ERP records. BI reports. MeeruAI gets the work done.";
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: -32,
+    scale: 0.96,
+    filter: "blur(4px)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+  },
+};
 
 export default function MeeruFitsSection() {
   const [typedText, setTypedText] = useState("");
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const cardsInView = useInView(cardsRef, { once: true, amount: 0.3 });
 
   // Intersection Observer to trigger typing when section is in view
   useEffect(() => {
@@ -54,7 +72,7 @@ export default function MeeruFitsSection() {
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#FF7448]/15 blur-[100px] rounded-full" />
         {/* M logo positioned top right */}
         <img 
-          src="https://www.starbridgemarketing.com/meeruai/wp-content/uploads/2026/05/meeru-m-coral.png" 
+          src="/meeru-m-coral.png"
           alt="" 
           className="absolute right-[-5%] top-0 h-[40%] w-auto object-contain opacity-40"
           style={{
@@ -86,10 +104,18 @@ export default function MeeruFitsSection() {
               signal to explanation to reviewed action.
             </p>
 
-            <div className="space-y-3 mt-12">
-              {/* MeeruAI Card */}
-              <div className="rounded-xl border border-orange-200 bg-[#FFF5F2] p-5">
-                <div className="flex items-start justify-between gap-4">
+            <div ref={cardsRef} className="space-y-3 mt-12">
+              {/* MeeruAI Card — data-reveal="2" (animates last) */}
+              <motion.div
+                variants={cardVariants}
+                initial="hidden"
+                animate={cardsInView ? "visible" : "hidden"}
+                transition={{ duration: 0.7, delay: 0.3 + 2 * 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-xl border border-orange-200 bg-[#FFF5F2] p-5 relative"
+              >
+                {/* Glow shadow */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-radial from-[#FF7448]/10 to-transparent opacity-0 data-[visible=true]:opacity-100 transition-opacity duration-700" />
+                <div className="relative z-10 flex items-start justify-between gap-4">
                   <div>
                     <img src="/meeruai-logo.png" alt="MeeruAI" className="h-[22px] w-auto object-contain mb-3" />
                     <div className="flex items-start gap-2">
@@ -103,10 +129,16 @@ export default function MeeruFitsSection() {
                     Understand + Resolve + Complete
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* BI Tools Card */}
-              <div className="rounded-xl border border-gray-100 bg-gray-50/80 p-5">
+              {/* BI Tools Card — data-reveal="1" (animates second) */}
+              <motion.div
+                variants={cardVariants}
+                initial="hidden"
+                animate={cardsInView ? "visible" : "hidden"}
+                transition={{ duration: 0.7, delay: 0.3 + 1 * 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-xl border border-gray-100 bg-gray-50/80 p-5"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h4 className="text-[14px] font-semibold text-gray-800 mb-2">BI tools</h4>
@@ -121,10 +153,16 @@ export default function MeeruFitsSection() {
                     Report only
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* ERP Systems Card */}
-              <div className="rounded-xl border border-gray-100 bg-gray-50/80 p-5">
+              {/* ERP Systems Card — data-reveal="0" (animates first) */}
+              <motion.div
+                variants={cardVariants}
+                initial="hidden"
+                animate={cardsInView ? "visible" : "hidden"}
+                transition={{ duration: 0.7, delay: 0.3 + 0 * 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-xl border border-gray-100 bg-gray-50/80 p-5"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h4 className="text-[14px] font-semibold text-gray-800 mb-2">ERP systems</h4>
@@ -139,7 +177,7 @@ export default function MeeruFitsSection() {
                     Record only
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 

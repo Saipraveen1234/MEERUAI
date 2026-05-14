@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "MeeruAI - AI Workbenches for Finance Teams",
   description:
     "MeeruAI helps finance teams close faster, explain every variance, and act with confidence with source-traced evidence, review, and audit-ready execution built in.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

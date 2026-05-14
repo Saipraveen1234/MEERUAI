@@ -2,7 +2,6 @@ import Navbar from "./shared/Navbar";
 import HeroSection from "./home/sections/HeroSection";
 import OpportunitySection from "./home/sections/OpportunitySection";
 import MeeruFitsSection from "./home/sections/MeeruFitsSection";
-import ArchitectureSection from "./home/sections/ArchitectureSection";
 import ArchitectureDiagramSection from "./home/sections/ArchitectureDiagramSection";
 import CapabilitiesSection from "./home/sections/CapabilitiesSection";
 import ProductsSection from "./home/sections/ProductsSection";
@@ -18,7 +17,6 @@ export default function Home() {
         <HeroSection />
         <OpportunitySection />
         <MeeruFitsSection />
-        <ArchitectureSection />
         <ArchitectureDiagramSection />
         <CapabilitiesSection />
         <ProductsSection />

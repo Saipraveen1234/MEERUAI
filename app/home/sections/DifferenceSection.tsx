@@ -63,11 +63,34 @@ export default function DifferenceSection() {
         <p className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4">
           THE DIFFERENCE
         </p>
-        <h2 className="text-4xl lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-2xl mb-16">
-          Watch the Numbers Land and Discover What they Mean for Your Team.
-        </h2>
+        <div className="flex items-start justify-between gap-4 mb-10 lg:mb-16">
+          <h2 className="text-4xl lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-2xl">
+            Watch the Numbers Land and Discover What they Mean for Your Team.
+          </h2>
+          {/* Mobile nav arrows - inline with title */}
+          <div className="flex items-center gap-3 lg:hidden shrink-0 mt-1">
+            <span className="text-sm text-gray-400 font-medium tabular-nums">{slideCounter}</span>
+            <div className="flex gap-2">
+              <button 
+                onClick={handlePrev}
+                className="w-9 h-9 rounded-full border border-orange-200 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
+                style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.55)' }}
+              >
+                <ChevronUp className="w-4 h-4" />
+              </button>
+              <button 
+                onClick={handleNext}
+                className="w-9 h-9 rounded-full border border-orange-200 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
+                style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.55)' }}
+              >
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        {/* Desktop layout */}
+        <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column - Ledger */}
           <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm min-h-[380px]">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
@@ -111,17 +134,19 @@ export default function DifferenceSection() {
                 MEERUAI · INTERPRETATION
               </span>
               <div className="flex items-center gap-4">
-                <span className="text-xs text-gray-400 font-medium transition-all">{slideCounter}</span>
+                <span className="text-sm text-gray-400 font-medium tabular-nums transition-all">{slideCounter}</span>
                 <div className="flex gap-2">
                   <button 
                     onClick={handlePrev}
-                    className="w-8 h-8 rounded-full border border-orange-200 bg-[#FFF5F0] text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors shadow-sm"
+                    className="w-9 h-9 rounded-full border border-orange-200 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
+                    style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.55)' }}
                   >
                     <ChevronUp className="w-4 h-4" />
                   </button>
                   <button 
                     onClick={handleNext}
-                    className="w-8 h-8 rounded-full border border-orange-200 bg-[#FFF5F0] text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors shadow-sm"
+                    className="w-9 h-9 rounded-full border border-orange-200 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
+                    style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.55)' }}
                   >
                     <ChevronDown className="w-4 h-4" />
                   </button>
@@ -129,14 +154,15 @@ export default function DifferenceSection() {
               </div>
             </div>
 
-            <div className="min-h-[220px]">
-              <AnimatePresence mode="wait">
+            <div className="relative min-h-[220px]">
+              <AnimatePresence>
                 <motion.div
                   key={currentSlide}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="absolute inset-0"
                 >
                   <h3 className="text-[32px] lg:text-4xl font-light text-gray-900 mb-6 leading-tight">
                     {currentInterpretation.title}
@@ -150,6 +176,61 @@ export default function DifferenceSection() {
                 </motion.div>
               </AnimatePresence>
             </div>
+          </div>
+        </div>
+
+        {/* Mobile layout - unified stacked cards */}
+        <div className="lg:hidden rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+          {/* Header bar */}
+          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-white">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-meeru-orange" />
+              <span className="text-[10px] font-bold tracking-[0.15em] text-gray-500 uppercase">
+                LIVE LEDGER · Q3 CLOSE
+              </span>
+            </div>
+            <span className="text-xs text-gray-400 font-medium transition-all">{slideCounter}</span>
+          </div>
+
+          {/* Stacked unified cards — progressive reveal like desktop ledger */}
+          <div className="divide-y divide-gray-100 min-h-[1100px]">
+            <AnimatePresence>
+              {allLedgerItems.slice(0, currentSlide + 1).map((item, index) => {
+                const interp = interpretations[index];
+                return (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="px-5 py-5 bg-white"
+                  >
+                    {/* Ledger row */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className="text-[11px] text-gray-400 font-mono shrink-0 uppercase">{item.label}</span>
+                        <span className="text-[13px] text-gray-700 font-medium truncate">{item.title}</span>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0 ml-3">
+                        <span className="text-[13px] font-bold text-gray-900">{item.value}</span>
+                        <span className="text-[11px] font-bold text-meeru-orange">{item.delta}</span>
+                      </div>
+                    </div>
+
+                    {/* Interpretation */}
+                    <h3 className="text-xl font-medium text-gray-900 mb-2 leading-snug">
+                      {interp.title}
+                    </h3>
+                    <p className="text-[14px] text-gray-600 leading-relaxed mb-3">
+                      {interp.text}
+                    </p>
+                    <p className="text-[10px] font-bold tracking-[0.15em] text-meeru-orange uppercase">
+                      {interp.footer}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
         </div>
       </div>

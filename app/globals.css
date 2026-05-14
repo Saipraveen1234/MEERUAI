@@ -10,3 +10,183 @@
     @apply bg-white text-gray-900 antialiased;
   }
 }
+
+/* ── Architecture Section Connector Animations ── */
+@keyframes orbit-y {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100%);
+  }
+}
+
+@keyframes dash-flow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -24px;
+  }
+}
+
+@keyframes aa-orbit {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(100%, 0);
+  }
+}
+
+@keyframes archPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(226, 106, 69, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(226, 106, 69, 0);
+  }
+}
+
+/* ── Opportunity Section Blueprint Animations ── */
+@keyframes opportunityFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-10px); }
+}
+
+.opportunity-float {
+  animation: opportunityFloat 9s ease-in-out 1.2s infinite alternate;
+}
+
+/* ── Proof Points Section Animations ── */
+@keyframes proofFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-10px); }
+}
+
+.proof-float {
+  animation: proofFloat 9s ease-in-out 1.2s infinite alternate;
+}
+
+@keyframes gridPan {
+  to {
+    background-position: 56px 56px, 56px 56px;
+  }
+}
+
+@keyframes bpDraw {
+  0%   { stroke-dashoffset: 1400; opacity: 0; }
+  10%  { opacity: 1; }
+  55%  { stroke-dashoffset: 0; opacity: 1; }
+  85%  { stroke-dashoffset: 0; opacity: 0.8; }
+  100% { stroke-dashoffset: -1400; opacity: 0; }
+}
+
+@keyframes bpNode {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.8); }
+}
+
+@keyframes bpRing {
+  0%, 100% { opacity: 0.6; r: 12; }
+  50%      { opacity: 1; r: 26; }
+}
+
+@keyframes bpVert {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+
+.blueprint-decor {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.45;
+  inset: 0;
+}
+
+.blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(232, 104, 58, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(232, 104, 58, 0.45) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(90deg, #0000, #0006 35%, #000);
+  mask-image: linear-gradient(90deg, #0000, #0006 35%, #000);
+  animation: gridPan 24s linear infinite;
+}
+
+.blueprint-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(90deg, #0000, #0000004d 35%, #000);
+  mask-image: linear-gradient(90deg, #0000, #0000004d 35%, #000);
+}
+
+.bp-line {
+  stroke: #E8683A;
+  stroke-width: 1.8px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: bpDraw 9s ease-in-out infinite;
+}
+
+.bp-l1 { animation-delay: 0s; }
+.bp-l2 { animation-delay: 1s; stroke-width: 1.4px; }
+.bp-l3 { animation-delay: 2s; }
+.bp-l4 { animation-delay: 3s; stroke-width: 2px; }
+.bp-l5 { animation-delay: 4s; }
+.bp-l6 { animation-delay: 1.5s; stroke-width: 1.3px; opacity: 0.85; }
+.bp-l7 { animation-delay: 3.5s; stroke-width: 1.3px; opacity: 0.85; }
+
+.bp-vert {
+  stroke-dasharray: 6 8;
+  stroke-width: 2;
+  animation: bpVert 5s ease-in-out infinite;
+}
+
+.bp-vert-2 {
+  animation-delay: 1.5s;
+  opacity: 0.75;
+}
+
+.bp-node {
+  fill: #F1A489;
+  animation: bpNode 3s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.bp-node-2 { animation-delay: 0.5s; }
+.bp-node-3 { animation-delay: 1s; }
+.bp-node-4 { animation-delay: 1.5s; }
+.bp-node-5 { animation-delay: 2s; }
+
+.bp-ring {
+  fill: none;
+  stroke: #E8683A;
+  stroke-width: 1.6;
+  animation: bpRing 3.5s ease-in-out infinite;
+}

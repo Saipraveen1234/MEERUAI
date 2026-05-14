@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import DemoModal from "./DemoModal";
+import GartnerModal from "./GartnerModal";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Product", href: "#products" },
   { label: "About", href: "/about" },
 ];
 
@@ -16,6 +16,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGartnerOpen, setIsGartnerOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -27,13 +28,20 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm py-0"
-          : "bg-white py-1"
+          ? "bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm"
+          : "bg-white"
       }`}
     >
+      {/* Announcement banner */}
+      <button
+        onClick={() => setIsGartnerOpen(true)}
+        className="w-full bg-meeru-orange text-white text-center text-xs font-semibold tracking-wide py-2 px-4 hover:bg-meeru-orange/90 transition-colors cursor-pointer"
+      >
+        Meet MeeruAI at Gartner FES 2026 &nbsp;·&nbsp; Booth #721 &nbsp;→&nbsp; Get Your Discount Code
+      </button>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#" className="flex items-center">
+          <a href="/" className="flex items-center">
             <img
               src="/meeruai-logo.png"
               alt="MeeruAI"
@@ -53,13 +61,6 @@ export default function Navbar() {
               </a>
             ))}
             <div className="relative">
-              <button
-                onClick={() => setResourcesOpen(!resourcesOpen)}
-                className="group flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
-              >
-                Resources
-                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${resourcesOpen ? "rotate-180 text-meeru-orange" : ""}`} />
-              </button>
               <AnimatePresence>
                 {resourcesOpen && (
                   <motion.div
@@ -139,6 +140,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       <DemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <GartnerModal isOpen={isGartnerOpen} onClose={() => setIsGartnerOpen(false)} />
     </header>
   );
 }

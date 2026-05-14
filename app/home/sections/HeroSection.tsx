@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import DemoModal from "../../shared/DemoModal";
 
 const SUBHEADLINE = "Close faster. Explain every variance. Act with confidence.";
 
@@ -16,6 +17,7 @@ export default function HeroSection() {
   const [typedText, setTypedText] = useState("");
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Start typing after the heading fades in
   useEffect(() => {
@@ -42,7 +44,7 @@ export default function HeroSection() {
   }, [hasStarted]);
 
   return (
-    <section className="relative w-full bg-white pt-24 lg:pt-32 pb-16 lg:pb-24 overflow-hidden">
+    <section className="relative w-full bg-white pt-32 lg:pt-40 pb-16 lg:pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
@@ -75,14 +77,14 @@ export default function HeroSection() {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4">
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow"
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow cursor-pointer"
               >
                 Request a Demo <ArrowRight className="w-4 h-4" />
-              </a>
+              </button>
               <a
-                href="#"
+                href="#products"
                 className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gray-200 text-gray-600 text-[15px] font-medium hover:border-gray-300 hover:bg-gray-50 transition-colors bg-white/50 backdrop-blur-sm"
               >
                 Explore the Workbenches <ArrowRight className="w-4 h-4" />
@@ -133,6 +135,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
+      <DemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }

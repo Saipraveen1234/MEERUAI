@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { TrendingUp, BarChart2, Settings2, Target } from "lucide-react";
+import { TrendingUp, BarChart2, Settings2 } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -263,31 +263,39 @@ export default function AboutWorkbenchesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7 }}
-          className="mt-10 mx-auto max-w-2xl bg-gray-900 rounded-3xl p-6 md:p-10 text-center"
+          className="mt-10 mx-auto max-w-5xl bg-[#1a1614] rounded-3xl p-8 md:p-14 text-center"
         >
-          <div className="flex justify-center mb-4">
-            <div className="relative">
-              <div className="absolute inset-0 bg-meeru-orange rounded-full blur-[8px] opacity-40 scale-150" />
-              <div className="w-10 h-10 rounded-full bg-meeru-orange/20 border border-meeru-orange/40 flex items-center justify-center relative z-10">
-                <Target className="w-5 h-5 text-meeru-orange" strokeWidth={1.5} />
+          {/* Icon */}
+          <div className="flex justify-center mb-5">
+            <div className="w-14 h-14 rounded-[20px] bg-[#f86e4226] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-full bg-meeru-orange/20 border-2 border-meeru-orange flex items-center justify-center">
+                <svg className="w-4 h-4 text-meeru-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
               </div>
             </div>
           </div>
-          <span className="inline-block px-3 py-1 rounded-full bg-meeru-orange/20 text-meeru-orange text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+
+          {/* OUTPUT badge */}
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#e0785626] text-meeru-orange text-[10px] font-bold tracking-[0.2em] uppercase mb-5">
             OUTPUT
           </span>
-          <h3 className="text-2xl lg:text-3xl font-semibold text-white mb-3">
-            The Decision
+
+          <h3 className="text-3xl lg:text-4xl font-semibold text-white mb-4">
+            Decide and Act
           </h3>
-          <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-md mx-auto">
-            Context + reasoning + execution, compiled into one. Not a report you
-            interpret — a decision explained, sourced, and ready to act on.
+          <p className="text-[15px] text-gray-400 leading-relaxed mb-8 max-w-md mx-auto">
+            Context + reasoning + execution, compiled into one.
+            <br />
+            Not a report you interpret — a decision explained, sourced, and ready to act on.
           </p>
-          <div className="flex items-center justify-center gap-3 flex-wrap">
+
+          {/* Action pills */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3">
             {["Explain", "Forecast", "Act"].map((label) => (
               <span
                 key={label}
-                className="px-4 py-1.5 rounded-full border border-meeru-orange/40 text-meeru-orange text-xs font-medium bg-meeru-orange/10"
+                className="px-3 sm:px-5 py-2 rounded-full border border-meeru-orange/30 text-meeru-orange text-xs sm:text-sm font-medium bg-[#1e0f05] whitespace-nowrap"
               >
                 {label}
               </span>
