@@ -74,7 +74,7 @@ export default function MeeruFitsSection() {
         <img 
           src="/meeru-m-coral.png"
           alt="Background Logo" 
-          className="absolute right-[5%] top-[10%] h-[280px] w-auto object-contain opacity-[0.25]"
+          className="absolute right-[5%] top-[10%] h-[350px] w-auto object-contain opacity-[0.25]"
           style={{
             maskImage: "radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%)",
             WebkitMaskImage: "radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%)"
@@ -86,24 +86,25 @@ export default function MeeruFitsSection() {
         <p className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4">
           WHERE MEERUAI FITS
         </p>
-        <h2 className="text-4xl lg:text-[3rem] font-light leading-[1.15] text-gray-900 max-w-3xl mb-12">
+        <h2 className="text-4xl lg:text-[3rem] font-light leading-[1.15] text-gray-900 max-w-3xl mb-8">
           The AI Workbench Layer Your Finance Stack Is Missing
         </h2>
 
-        <div className="grid lg:grid-cols-[1fr_auto] gap-12 lg:gap-24 items-start">
-          {/* Left Column */}
-          <div className="space-y-4 text-gray-600 text-[15px] leading-relaxed max-w-xl">
-            <p>
-              ERP systems record what happened. BI tools report what changed. Close tools track
-              what still needs to be done.
-            </p>
-            <p>
-              MeeruAI helps finance complete the work across systems. It connects to your existing
-              stack, grounds every answer in your company context, and moves finance work from
-              signal to explanation to reviewed action.
-            </p>
+        <div className="space-y-4 text-gray-600 text-[15px] leading-relaxed max-w-2xl mb-12">
+          <p>
+            ERP systems record what happened. BI tools report what changed. Close tools track
+            what still needs to be done.
+          </p>
+          <p>
+            MeeruAI helps finance complete the work across systems. It connects to your existing
+            stack, grounds every answer in your company context, and moves finance work from
+            signal to explanation to reviewed action.
+          </p>
+        </div>
 
-            <div ref={cardsRef} className="space-y-3 mt-12">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+          {/* Left Column (Cards) */}
+          <div ref={cardsRef} className="space-y-3 w-full lg:w-[540px] shrink-0">
               {/* MeeruAI Card — data-reveal="2" (animates last) */}
               <motion.div
                 variants={cardVariants}
@@ -119,7 +120,7 @@ export default function MeeruFitsSection() {
                     <img src="/meeruai-logo.png" alt="MeeruAI" className="h-[22px] w-auto object-contain mb-3" />
                     <div className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-meeru-orange mt-1.5 shrink-0" />
-                      <p className="text-[11px] text-gray-600 leading-relaxed max-w-full md:max-w-[220px]">
+                      <p className="text-[11px] text-gray-600 leading-relaxed">
                         System of action: What needs to happen next, and how work gets done.
                       </p>
                     </div>
@@ -178,10 +179,9 @@ export default function MeeruFitsSection() {
                 </div>
               </motion.div>
             </div>
-          </div>
 
           {/* Right Column (Quote Card) */}
-          <div className="lg:w-[460px] lg:mt-8">
+          <div className="w-full lg:w-[460px] shrink-0">
             <div className="rounded-[1.5rem] border border-[#FF7448]/20 bg-white/90 backdrop-blur-sm p-6 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <h3 className="text-[1.65rem] font-normal text-gray-900 leading-[1.3] tracking-tight mb-6 min-h-[3.5rem]">
                 <span className="text-gray-900">"{typedText}</span>
