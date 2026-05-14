@@ -46,7 +46,7 @@ export default function HeroSection() {
   return (
     <section className="relative w-full bg-white pt-32 lg:pt-40 pb-16 lg:pb-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="max-w-4xl lg:max-w-5xl">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -55,13 +55,13 @@ export default function HeroSection() {
           >
             <motion.h1
               variants={fadeUp}
-              className="text-4xl lg:text-5xl xl:text-6xl font-light leading-snug md:leading-[1.1] text-gray-900"
+              className="text-4xl lg:text-5xl xl:text-6xl font-light leading-snug md:leading-[1.1] text-gray-900 lg:whitespace-nowrap"
             >
               AI Workbenches for the Office of the CFO
             </motion.h1>
 
             <motion.div variants={fadeUp} className="relative min-h-[2.5rem]">
-              <p className="text-xl lg:text-2xl text-gray-500 font-light leading-relaxed">
+              <p className="text-xl lg:text-[28px] text-gray-500 font-light leading-relaxed max-w-full lg:whitespace-nowrap">
                 <span>{typedText}</span>
                 {!isTypingComplete && (
                   <span className="inline-block w-[2px] h-[1em] bg-meeru-orange ml-[2px] align-middle animate-pulse" />
@@ -71,7 +71,7 @@ export default function HeroSection() {
 
             <motion.div variants={fadeUp} className="w-12 h-1 bg-meeru-orange rounded-full" />
 
-            <motion.p variants={fadeUp} className="text-[14px] lg:text-[15px] text-gray-500 leading-relaxed max-w-lg">
+            <motion.p variants={fadeUp} className="text-[14px] lg:text-[17px] text-gray-500 leading-relaxed max-w-2xl">
               MeeruAI helps finance teams complete high-stakes work with source-traced AI, from
               accounting close to variance analysis to performance action.
             </motion.p>
