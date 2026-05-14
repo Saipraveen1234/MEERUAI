@@ -68,7 +68,7 @@ export default function CTAFooterSection() {
                   alt="M"
                   className="h-8 w-auto object-contain"
                 />
-                <span className="text-[26px] font-bold tracking-tight text-gray-900 -ml-1">eeruAI</span>
+                <span className="text-[26px] font-bold tracking-tight text-gray-900">eeruAI</span>
               </div>
               <p className="text-[13px] text-gray-500 leading-relaxed max-w-full md:max-w-[280px]">
                 MeeruAI helps finance teams complete high-stakes work with source-traced AI, from
