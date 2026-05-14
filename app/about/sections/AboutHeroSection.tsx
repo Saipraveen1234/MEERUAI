@@ -10,13 +10,13 @@ const fadeUp = {
 
 export default function AboutHeroSection() {
   return (
-    <section className="relative w-full bg-white pt-20 pb-20 lg:pb-32 overflow-hidden">
+    <section className="relative w-full bg-white pt-28 lg:pt-32 pb-20 lg:pb-32 overflow-hidden">
       {/* Large wordmark */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="w-full flex items-center justify-center px-4 pt-8 pb-4"
+        className="w-full flex items-center justify-center px-4 pt-10 lg:pt-14 pb-4"
       >
         <Image
           src="/meeru-logo-big.png"
