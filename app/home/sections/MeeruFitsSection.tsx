@@ -110,7 +110,7 @@ export default function MeeruFitsSection() {
                 initial="hidden"
                 animate={cardsInView ? "visible" : "hidden"}
                 transition={{ duration: 0.7, delay: 0.3 + 2 * 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="rounded-xl border border-orange-200 bg-[#FFF5F2] p-5 relative"
+                className="rounded-xl border border-orange-200 bg-[#FFF5F2] p-5 relative shadow-[0_8px_30px_rgba(255,116,72,0.25)]"
               >
                 {/* Glow shadow */}
                 <div className="absolute inset-0 rounded-xl bg-gradient-radial from-[#FF7448]/10 to-transparent opacity-0 data-[visible=true]:opacity-100 transition-opacity duration-700" />
