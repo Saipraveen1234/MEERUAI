@@ -115,13 +115,23 @@ export default function GartnerModal({ isOpen, onClose }: GartnerModalProps) {
                       Apply at checkout when registering for your Gartner FES 2026 pass
                     </p>
                   </div>
-                  <button
-                    onClick={handleCopy}
-                    className="self-start sm:self-auto flex items-center gap-2 px-5 py-2.5 rounded-lg bg-meeru-orange text-white text-sm font-semibold hover:bg-meeru-orange/90 transition-colors shrink-0"
-                  >
-                    {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                    {copied ? "Copied!" : "Copy Code"}
-                  </button>
+                  <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+                    <a
+                      href="https://www.gartner.com/en/conferences/na/cfo-finance-us/register"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-gray-900 text-sm font-semibold hover:bg-gray-100 transition-colors"
+                    >
+                      Register Now <ArrowRight className="w-4 h-4" />
+                    </a>
+                    <button
+                      onClick={handleCopy}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-meeru-orange text-white text-sm font-semibold hover:bg-meeru-orange/90 transition-colors"
+                    >
+                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      {copied ? "Copied!" : "Copy Code"}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Session card */}
