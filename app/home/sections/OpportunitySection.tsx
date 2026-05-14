@@ -95,17 +95,18 @@ export default function OpportunitySection() {
       />
 
       <div className="max-w-6xl mx-auto px-5 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 mb-14">
+        <div className="mb-14">
           <motion.div variants={textVariants}>
             <p className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4">
               THE OPPORTUNITY
             </p>
-            <h2 className="text-3xl md:text-[2.5rem] lg:text-[3.2rem] font-light text-gray-900 leading-[1.15]">
-              Finance has more tools than ever,{" "}
-              <span className="block">yet the work is still manual.</span>
+            <h2 className="text-3xl md:text-[2.5rem] lg:text-[3.2rem] font-normal text-gray-900 leading-[1.15] mb-8">
+              Finance has more tools than{" "}<br className="hidden md:block" />
+              ever, yet the work is still{" "}<br className="hidden md:block" />
+              manual.
             </h2>
           </motion.div>
-          <motion.div variants={textVariants} className="flex flex-col justify-end gap-3 text-sm text-gray-600 leading-relaxed">
+          <motion.div variants={textVariants} className="flex flex-col gap-4 text-[15px] text-gray-600 leading-relaxed max-w-2xl">
             <p>
               ERP records the numbers. BI reports what happened. Close tools track the
               process. Generic AI drafts the commentary. MeeruAI helps finance finish the

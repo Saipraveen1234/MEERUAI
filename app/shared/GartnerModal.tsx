@@ -116,6 +116,13 @@ export default function GartnerModal({ isOpen, onClose }: GartnerModalProps) {
                     </p>
                   </div>
                   <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+                    <button
+                      onClick={handleCopy}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-meeru-orange text-white text-sm font-semibold hover:bg-meeru-orange/90 transition-colors"
+                    >
+                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      {copied ? "Copied!" : "Copy Code"}
+                    </button>
                     <a
                       href="https://www.gartner.com/en/conferences/na/cfo-finance-us/register"
                       target="_blank"
@@ -124,13 +131,6 @@ export default function GartnerModal({ isOpen, onClose }: GartnerModalProps) {
                     >
                       Register Now <ArrowRight className="w-4 h-4" />
                     </a>
-                    <button
-                      onClick={handleCopy}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-meeru-orange text-white text-sm font-semibold hover:bg-meeru-orange/90 transition-colors"
-                    >
-                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      {copied ? "Copied!" : "Copy Code"}
-                    </button>
                   </div>
                 </div>
 

@@ -25,24 +25,33 @@ export default function CTAFooterSection({ showCTA = true }: { showCTA?: boolean
         <>
           {/* Background radial glow */}
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#FFF0E5] blur-[120px] rounded-full pointer-events-none opacity-80 translate-x-1/3 -translate-y-1/4" />
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.15 } },
-        }}
-        className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 text-center"
-      >
-        <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl xl:text-[56px] font-light leading-[1.2] text-gray-900 max-w-4xl mx-auto mb-6">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 text-center">
+        <motion.h2
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="text-4xl lg:text-5xl xl:text-[56px] font-light leading-[1.2] text-gray-900 max-w-4xl mx-auto mb-6"
+        >
           Finance finally has a system that finishes the work, not just explains it.
         </motion.h2>
-        <motion.p variants={fadeUp} className="text-[17px] text-gray-600 leading-relaxed max-w-3xl mx-auto mb-10">
+        <motion.p
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="text-[17px] text-gray-600 leading-relaxed max-w-3xl mx-auto mb-10"
+        >
           MeeruAI helps finance teams close faster, explain every variance, and act with confidence
           with source-traced evidence, review, and audit-ready execution built in.
         </motion.p>
-        <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-4">
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.75, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
           <button
             onClick={() => setIsModalOpen(true)}
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FF7448] text-white text-[15px] font-medium hover:bg-[#FF7448]/90 transition-colors shadow-sm hover:shadow cursor-pointer"
@@ -56,7 +65,7 @@ export default function CTAFooterSection({ showCTA = true }: { showCTA?: boolean
             Explore the Workbenches <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>
-      </motion.div>
+      </div>
         </>
       )}
 
