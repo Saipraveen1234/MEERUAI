@@ -16,27 +16,27 @@ const interpretations = [
   {
     title: 'Revenue beat plan by $980K',
     text: 'Enterprise renewals closed two weeks early. North America drove 64% of the upside — flag for the board narrative.',
-    footer: '—— CITED FROM GL · 4000'
+    footer: 'CITED FROM GL · 4000'
   },
   {
     title: 'Margin held at 67.2%',
     text: 'Cloud spend ticked up with new design partners, but unit economics improved. No action required this cycle.',
-    footer: '—— CITED FROM GL · 5200'
+    footer: 'CITED FROM GL · 5200'
   },
   {
     title: 'S&M efficiency up 11 pts',
     text: 'CAC payback compressed to 9.3 months. Reallocate $180K from paid social into the field motion next quarter.',
-    footer: '—— CITED FROM GL · 6100'
+    footer: 'CITED FROM GL · 6100'
   },
   {
     title: 'Single driver: contractor over-run',
     text: '94% of the OpEx variance traces to one vendor in EMEA. Cited, audit-ready — drafted for your CFO commentary.',
-    footer: '—— CITED FROM GL · 7300'
+    footer: 'CITED FROM GL · 7300'
   },
   {
     title: 'Books closed on day 4',
     text: 'Agents reconciled 1,284 journal entries overnight. Your team reviewed 37 exceptions instead of 1,284.',
-    footer: '—— CITED FROM CLOSE · D+4'
+    footer: 'CITED FROM CLOSE · D+4'
   }
 ];
 
@@ -69,35 +69,32 @@ export default function DifferenceSection() {
         >
           THE DIFFERENCE
         </motion.p>
-        <div className="flex items-start justify-between gap-4 mb-10 lg:mb-16">
+        <div className="relative mb-10 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-2xl"
+            className="text-[36px] lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-2xl pr-20 lg:pr-0"
           >
             Watch the Numbers Land and Discover What they Mean for Your Team.
           </motion.h2>
-          {/* Mobile nav arrows - inline with title */}
-          <div className="flex items-center gap-3 lg:hidden shrink-0 mt-1">
-            <span className="text-sm text-gray-400 font-medium tabular-nums">{slideCounter}</span>
-            <div className="flex gap-2">
-              <button 
-                onClick={handlePrev}
-                className="w-9 h-9 rounded-full border border-orange-200 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
-                style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.55)' }}
-              >
-                <ChevronUp className="w-4 h-4" />
-              </button>
-              <button 
-                onClick={handleNext}
-                className="w-9 h-9 rounded-full border border-orange-200 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
-                style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.55)' }}
-              >
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </div>
+          {/* Mobile nav arrows - floating bottom right */}
+          <div className="absolute bottom-1 right-0 flex gap-2 lg:hidden">
+            <button 
+              onClick={handlePrev}
+              className="w-[34px] h-[34px] rounded-full border border-meeru-orange/30 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
+              style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.3)' }}
+            >
+              <ChevronUp className="w-5 h-5" />
+            </button>
+            <button 
+              onClick={handleNext}
+              className="w-[34px] h-[34px] rounded-full border border-meeru-orange/30 bg-white text-meeru-orange flex items-center justify-center hover:bg-meeru-orange hover:text-white transition-colors"
+              style={{ boxShadow: '0 0 16px rgba(248, 110, 66, 0.3)' }}
+            >
+              <ChevronDown className="w-5 h-5" />
+            </button>
           </div>
         </div>
 
@@ -194,7 +191,8 @@ export default function DifferenceSection() {
                   <p className="text-[15px] text-gray-600 leading-relaxed mb-8">
                     {currentInterpretation.text}
                   </p>
-                  <p className="text-[10px] font-bold tracking-[0.15em] text-meeru-orange uppercase">
+                  <p className="text-[10px] font-bold tracking-[0.15em] text-meeru-orange uppercase flex items-center gap-3">
+                    <span className="w-10 h-[1px] bg-meeru-orange/40"></span>
                     {currentInterpretation.footer}
                   </p>
                 </motion.div>
@@ -223,38 +221,39 @@ export default function DifferenceSection() {
           </div>
 
           {/* Stacked unified cards — progressive reveal like desktop ledger */}
-          <div className="divide-y divide-gray-100 min-h-[1100px]">
+          <div className="divide-y divide-gray-100 pb-2">
             <AnimatePresence>
               {allLedgerItems.slice(0, currentSlide + 1).map((item, index) => {
                 const interp = interpretations[index];
                 return (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="px-5 py-5 bg-white"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    transition={{ duration: 0.4 }}
+                    className="px-5 py-6 bg-white overflow-hidden"
                   >
                     {/* Ledger row */}
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <span className="text-[11px] text-gray-400 font-mono shrink-0 uppercase">{item.label}</span>
-                        <span className="text-[13px] text-gray-700 font-medium truncate">{item.title}</span>
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="flex items-center gap-4 min-w-0">
+                        <span className="text-[11px] text-gray-400 font-medium tracking-wide shrink-0 uppercase">{item.label}</span>
+                        <span className="text-[14px] text-gray-600 font-normal truncate">{item.title}</span>
                       </div>
-                      <div className="flex items-center gap-2 shrink-0 ml-3">
-                        <span className="text-[13px] font-bold text-gray-900">{item.value}</span>
+                      <div className="flex items-center gap-3 shrink-0 ml-3">
+                        <span className="text-[14px] font-bold text-gray-900">{item.value}</span>
                         <span className="text-[11px] font-bold text-meeru-orange">{item.delta}</span>
                       </div>
                     </div>
 
                     {/* Interpretation */}
-                    <h3 className="text-xl font-medium text-gray-900 mb-2 leading-snug">
+                    <h3 className="text-[22px] font-normal text-gray-900 mb-3 leading-[1.3]">
                       {interp.title}
                     </h3>
-                    <p className="text-[14px] text-gray-600 leading-relaxed mb-3">
+                    <p className="text-[15px] text-gray-500 leading-relaxed mb-6">
                       {interp.text}
                     </p>
-                    <p className="text-[10px] font-bold tracking-[0.15em] text-meeru-orange uppercase">
+                    <p className="text-[10px] font-bold tracking-[0.15em] text-meeru-orange uppercase flex items-center gap-3">
+                      <span className="w-10 h-[1px] bg-meeru-orange/40"></span>
                       {interp.footer}
                     </p>
                   </motion.div>
