@@ -58,7 +58,7 @@ export default function DifferenceSection() {
   const slideCounter = `0${currentSlide + 1} / 05`;
 
   return (
-    <section className="relative w-full bg-white py-20 lg:py-28 overflow-hidden">
+    <section className="relative w-full bg-white py-20 lg:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.p
           initial={{ opacity: 0, x: 40 }}

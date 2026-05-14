@@ -91,7 +91,7 @@ export default function ArchitectureDiagramSection() {
   return (
     <motion.section
       ref={sectionRef}
-      className="relative w-full bg-white py-20 lg:py-28 overflow-hidden"
+      className="relative w-full bg-white pb-20 lg:pb-32 pt-4 lg:pt-8 overflow-hidden"
       initial={{ opacity: 0, x: -64, y: 72, scale: 0.965 }}
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.15 }}

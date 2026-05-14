@@ -25,7 +25,7 @@ export default function CTAFooterSection({ showCTA = true }: { showCTA?: boolean
         <>
           {/* Background radial glow */}
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#FFF0E5] blur-[120px] rounded-full pointer-events-none opacity-80 translate-x-1/3 -translate-y-1/4" />
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 text-center">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pb-20 lg:pb-28 pt-4 lg:pt-8 text-center">
         <motion.h2
           initial={{ opacity: 0, x: -60 }}
           whileInView={{ opacity: 1, x: 0 }}

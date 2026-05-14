@@ -65,7 +65,7 @@ export default function CapabilitiesSection() {
   ];
 
   return (
-    <section className="relative w-full py-20 lg:py-28">
+    <section className="relative w-full pb-20 lg:pb-32 pt-4 lg:pt-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div
           className="rounded-[2.5rem] p-6 md:p-10 lg:p-16 relative overflow-hidden"

@@ -44,7 +44,7 @@ export default function HeroSection() {
   }, [hasStarted]);
 
   return (
-    <section className="relative w-full bg-white pt-40 lg:pt-56 pb-24 lg:pb-36 overflow-hidden">
+    <section className="relative w-full bg-white pt-40 lg:pt-56 pb-20 lg:pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-4xl lg:max-w-5xl">
           <motion.div

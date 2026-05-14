@@ -44,7 +44,7 @@ export default function OpportunitySection() {
 
   return (
     <motion.section
-      className={`relative py-24 border-t border-gray-100 overflow-hidden ${
+      className={`relative py-20 lg:py-32 border-t border-gray-100 overflow-hidden ${
         isInView ? "opportunity-float" : ""
       }`}
       style={{ backgroundColor: "rgba(249,249,248,0.6)" }}

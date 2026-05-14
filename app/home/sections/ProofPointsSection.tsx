@@ -38,7 +38,7 @@ export default function ProofPointsSection() {
 
   return (
     <motion.section
-      className={`relative w-full bg-slate-50 py-12 lg:py-16 overflow-hidden ${
+      className={`relative w-full bg-slate-50 py-12 lg:py-20 overflow-hidden ${
         isInView ? "proof-float" : ""
       }`}
       initial="hidden"
