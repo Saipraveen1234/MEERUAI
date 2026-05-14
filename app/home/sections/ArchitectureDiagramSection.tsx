@@ -135,6 +135,9 @@ export default function ArchitectureDiagramSection() {
             backgroundSize: "32px 32px",
           }}
         >
+          {/* Center Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[400px] bg-meeru-orange/20 blur-[80px] rounded-full pointer-events-none z-0" />
+
           {/* Single 3-col grid: each col owns its badge/logo + content */}
           <div className="relative z-10 grid lg:grid-cols-3 gap-4 lg:gap-6">
 
@@ -207,7 +210,7 @@ export default function ArchitectureDiagramSection() {
                       isActive
                         ? {
                             borderColor: "#E8683A",
-                            backgroundColor: "#FFF8F5",
+                            backgroundColor: "transparent",
                             boxShadow: "0 8px 28px rgba(232, 104, 58, 0.28), 0 2px 8px rgba(232, 104, 58, 0.15)",
                             y: -2,
                           }
@@ -231,9 +234,7 @@ export default function ArchitectureDiagramSection() {
                       {row.num}
                     </span>
                     <span
-                      className={`text-[11px] font-bold tracking-[0.07em] uppercase transition-colors duration-300 ${
-                        isActive ? "text-gray-900" : "text-gray-400"
-                      }`}
+                      className="text-[11px] font-bold tracking-[0.07em] uppercase transition-colors duration-300 text-gray-900"
                     >
                       {row.label}
                     </span>

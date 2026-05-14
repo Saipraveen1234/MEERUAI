@@ -6,7 +6,7 @@ export default function TermsPage() {
     <main className="min-h-screen">
       <Navbar />
       <div className="pt-24 lg:pt-32 pb-16 lg:pb-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header */}
           <div className="mb-10">
             <p className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4">
