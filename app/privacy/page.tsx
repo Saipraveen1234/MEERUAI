@@ -5,7 +5,7 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <div className="pt-24 lg:pt-32 pb-16 lg:pb-24">
+      <div className="pt-40 lg:pt-52 pb-16 lg:pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header */}
           <div className="mb-10">
@@ -15,14 +15,14 @@ export default function PrivacyPage() {
           </div>
 
           {/* Intro */}
-          <p className="text-[15px] text-gray-600 leading-relaxed mb-10">
+          <p className="text-[15px] text-gray-600 leading-relaxed">
             Meeru AI Inc (Hereafter called "Meeru AI" Company, We, Our, Us) has a comprehensive Data Protection and Privacy Policy plan. Our Privacy Policy published on our website (www.meeruai.com) clearly explains how we collect, process, and use user data (Website Users) provided to us using contact forms or email Ids on the website and through events and campaigns.
           </p>
 
-          <hr className="border-gray-200 my-8" />
+          <hr className="border-gray-200 my-14" />
 
           {/* Users' Personal Data on Website */}
-          <section className="mb-10">
+          <section className="mb-14">
             <h2 className="text-2xl lg:text-3xl font-medium text-gray-900 mb-4">
               Users' Personal Data on Website
             </h2>

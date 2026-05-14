@@ -5,7 +5,7 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <div className="pt-24 lg:pt-32 pb-16 lg:pb-24">
+      <div className="pt-40 lg:pt-52 pb-16 lg:pb-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header */}
           <div className="mb-10">

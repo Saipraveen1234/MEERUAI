@@ -67,18 +67,17 @@ export default function MeeruFitsSection() {
   return (
     <section ref={sectionRef} className="relative w-full bg-white py-20 lg:py-32 overflow-hidden">
       {/* Background M Logo with Glow */}
-      <div className="absolute top-0 right-0 w-[600px] h-[800px] pointer-events-none z-0">
+      <div className="absolute top-0 right-0 w-[800px] h-full pointer-events-none z-0 overflow-hidden">
         {/* Soft radial glow */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#FF7448]/15 blur-[100px] rounded-full" />
-        {/* M logo positioned top right */}
+        <div className="absolute right-[10%] top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#FF7448]/20 blur-[120px] rounded-full" />
+        {/* M logo positioned right */}
         <img 
           src="/meeru-m-coral.png"
-          alt="" 
-          className="absolute right-[-5%] top-0 h-[40%] w-auto object-contain opacity-40"
+          alt="Background Logo" 
+          className="absolute right-[0%] top-[15%] h-[55%] w-auto object-contain opacity-[0.15]"
           style={{
-            transform: "translateX(-20%)",
-            maskImage: "linear-gradient(to right, transparent 0%, black 60%)",
-            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 60%)"
+            maskImage: "radial-gradient(ellipse at 50% 40%, black 20%, transparent 70%)",
+            WebkitMaskImage: "radial-gradient(ellipse at 50% 40%, black 20%, transparent 70%)"
           }}
         />
       </div>
