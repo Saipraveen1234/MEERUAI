@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function ProductsSection() {
   const [activeTab, setActiveTab] = useState<"close" | "performance">("performance");
   const [workflowIndex, setWorkflowIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
     setWorkflowIndex(0);
@@ -33,6 +34,17 @@ export default function ProductsSection() {
 
   const activeWorkflows = activeTab === "close" ? closeWorkflows : performanceWorkflows;
   const currentText = activeWorkflows[workflowIndex];
+
+  useEffect(() => {
+    setTypedText("");
+    let i = 0;
+    const timer = setInterval(() => {
+      i++;
+      setTypedText(currentText.slice(0, i));
+      if (i >= currentText.length) clearInterval(timer);
+    }, 35);
+    return () => clearInterval(timer);
+  }, [currentText]);
 
   // Chart data
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
@@ -62,7 +74,7 @@ export default function ProductsSection() {
   `;
 
   return (
-    <section className="relative w-full bg-white py-20 lg:py-28 overflow-hidden">
+    <section id="products" className="relative w-full bg-white py-20 lg:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -295,17 +307,10 @@ export default function ProductsSection() {
                             </span>
                           </div>
                           <div key={workflowIndex} className="text-[13px] text-gray-700 leading-relaxed font-medium min-h-[40px]">
-                            {currentText.split(" ").map((word, i) => (
-                              <motion.span
-                                key={i}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.1, delay: i * 0.05 }}
-                                className="inline-block mr-1"
-                              >
-                                {word}
-                              </motion.span>
-                            ))}
+                            {typedText}
+                            {typedText.length < currentText.length && (
+                              <span className="inline-block w-[2px] h-[0.9em] bg-meeru-orange ml-[1px] align-middle animate-pulse" />
+                            )}
                           </div>
                           <div className="flex gap-1.5 mt-4">
                             {[0, 1, 2].map((i) => (
@@ -366,17 +371,10 @@ export default function ProductsSection() {
                             </span>
                           </div>
                           <div key={workflowIndex} className="text-[13px] text-gray-700 leading-relaxed font-medium min-h-[40px]">
-                            {currentText.split(" ").map((word, i) => (
-                              <motion.span
-                                key={i}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.1, delay: i * 0.05 }}
-                                className="inline-block mr-1"
-                              >
-                                {word}
-                              </motion.span>
-                            ))}
+                            {typedText}
+                            {typedText.length < currentText.length && (
+                              <span className="inline-block w-[2px] h-[0.9em] bg-meeru-orange ml-[1px] align-middle animate-pulse" />
+                            )}
                           </div>
                           <div className="flex gap-1.5 mt-4">
                             {[0, 1, 2].map((i) => (

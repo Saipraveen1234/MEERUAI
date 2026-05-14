@@ -92,6 +92,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
+          {/* Video section hidden temporarily until video is ready
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -133,6 +134,7 @@ export default function HeroSection() {
               </div>
             </div>
           </motion.div>
+          */}
         </div>
       </div>
       <DemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

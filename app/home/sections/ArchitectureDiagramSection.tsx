@@ -205,10 +205,20 @@ export default function ArchitectureDiagramSection() {
                     onClick={() => setActiveRow(i)}
                     animate={
                       isActive
-                        ? { borderColor: "#E8683A", backgroundColor: "#FFF8F5" }
-                        : { borderColor: "#E5E7EB", backgroundColor: "#FFFFFF" }
+                        ? {
+                            borderColor: "#E8683A",
+                            backgroundColor: "#FFF8F5",
+                            boxShadow: "0 8px 28px rgba(232, 104, 58, 0.28), 0 2px 8px rgba(232, 104, 58, 0.15)",
+                            y: -2,
+                          }
+                        : {
+                            borderColor: "#E5E7EB",
+                            backgroundColor: "#FFFFFF",
+                            boxShadow: "0 0px 0px rgba(232, 104, 58, 0)",
+                            y: 0,
+                          }
                     }
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
                     className="flex items-center gap-3 px-4 py-3 rounded-2xl border-2 cursor-pointer"
                   >
                     <span

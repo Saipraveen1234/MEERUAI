@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import DemoModal from "./DemoModal";
 
-export default function CTAFooterSection() {
+export default function CTAFooterSection({ showCTA = true }: { showCTA?: boolean }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const scrollToTop = () => {
@@ -21,9 +21,10 @@ export default function CTAFooterSection() {
 
   return (
     <section className="relative w-full bg-white overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#FFF0E5] blur-[120px] rounded-full pointer-events-none opacity-80 translate-x-1/3 -translate-y-1/4" />
-4
+      {showCTA && (
+        <>
+          {/* Background radial glow */}
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#FFF0E5] blur-[120px] rounded-full pointer-events-none opacity-80 translate-x-1/3 -translate-y-1/4" />
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -49,26 +50,27 @@ export default function CTAFooterSection() {
             Request a Demo <ArrowRight className="w-4 h-4" />
           </button>
           <a
-            href="#"
+            href="/#products"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gray-200 text-gray-600 text-[15px] font-medium hover:border-gray-300 hover:bg-gray-50 transition-colors bg-white/50 backdrop-blur-sm"
           >
             Explore the Workbenches <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>
       </motion.div>
+        </>
+      )}
 
       <footer className="relative border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
           <div className="grid md:grid-cols-3 gap-8 md:gap-12 items-start">
             {/* Logo and Description */}
             <div>
-              <div className="flex items-center mb-6">
+              <div className="mb-6">
                 <img
-                  src="/meeru-m-coral.png"
-                  alt="M"
+                  src="/meeruai-logo.png"
+                  alt="MeeruAI"
                   className="h-8 w-auto object-contain"
                 />
-                <span className="text-[26px] font-bold tracking-tight text-gray-900">eeruAI</span>
               </div>
               <p className="text-[13px] text-gray-500 leading-relaxed max-w-full md:max-w-[280px]">
                 MeeruAI helps finance teams complete high-stakes work with source-traced AI, from
@@ -80,21 +82,27 @@ export default function CTAFooterSection() {
             <div>
               <h4 className="text-[15px] font-medium text-gray-900 mb-6">Certifications</h4>
               <div className="flex items-center gap-3">
-                <img
-                  src="/SOC-logo.png"
-                  alt="AICPA SOC Certification"
-                  className="w-14 h-14 object-contain hover:scale-105 transition-transform"
-                />
-                <img
-                  src="/gdpr-logo.png"
-                  alt="GDPR Certification"
-                  className="w-14 h-14 object-contain hover:scale-105 transition-transform"
-                />
-                <img
-                  src="/iso-logo.png"
-                  alt="ISO Certification"
-                  className="w-14 h-14 object-contain hover:scale-105 transition-transform"
-                />
+                <a href="/trust">
+                  <img
+                    src="/SOC-logo.png"
+                    alt="AICPA SOC Certification"
+                    className="w-14 h-14 object-contain hover:scale-105 transition-transform cursor-pointer"
+                  />
+                </a>
+                <a href="/trust">
+                  <img
+                    src="/gdpr-logo.png"
+                    alt="GDPR Certification"
+                    className="w-14 h-14 object-contain hover:scale-105 transition-transform cursor-pointer"
+                  />
+                </a>
+                <a href="/trust">
+                  <img
+                    src="/iso-logo.png"
+                    alt="ISO Certification"
+                    className="w-14 h-14 object-contain hover:scale-105 transition-transform cursor-pointer"
+                  />
+                </a>
               </div>
             </div>
 
@@ -143,11 +151,11 @@ export default function CTAFooterSection() {
               &copy; 2026 MeeruAI Inc. All Rights Reserved.
             </p>
             <div className="flex items-center gap-3 text-[11px] font-medium text-gray-400">
-              <a href="#" className="hover:text-gray-600 transition-colors">Privacy</a>
+              <a href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</a>
               <span className="text-gray-300">/</span>
               <a href="/terms" className="hover:text-gray-600 transition-colors">Terms</a>
               <span className="text-gray-300">/</span>
-              <a href="#" className="hover:text-gray-600 transition-colors">Sitemap</a>
+              <a href="/sitemap.xml" className="hover:text-gray-600 transition-colors">Sitemap</a>
             </div>
           </div>
         </div>

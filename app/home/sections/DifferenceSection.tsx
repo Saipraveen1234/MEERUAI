@@ -60,13 +60,25 @@ export default function DifferenceSection() {
   return (
     <section className="relative w-full bg-white py-20 lg:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <p className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4">
+        <motion.p
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-xs font-semibold tracking-[0.2em] text-meeru-orange uppercase mb-4"
+        >
           THE DIFFERENCE
-        </p>
+        </motion.p>
         <div className="flex items-start justify-between gap-4 mb-10 lg:mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-2xl">
+          <motion.h2
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-4xl lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-2xl"
+          >
             Watch the Numbers Land and Discover What they Mean for Your Team.
-          </h2>
+          </motion.h2>
           {/* Mobile nav arrows - inline with title */}
           <div className="flex items-center gap-3 lg:hidden shrink-0 mt-1">
             <span className="text-sm text-gray-400 font-medium tabular-nums">{slideCounter}</span>
@@ -92,7 +104,13 @@ export default function DifferenceSection() {
         {/* Desktop layout */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column - Ledger */}
-          <div className="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm min-h-[380px]">
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-2xl border border-gray-200 bg-white overflow-hidden flex flex-col shadow-sm min-h-[380px]"
+          >
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-meeru-orange" />
@@ -125,10 +143,16 @@ export default function DifferenceSection() {
                 ))}
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column - Interpretation */}
-          <div className="flex flex-col pt-2">
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.75, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col pt-2"
+          >
             <div className="flex items-center justify-between mb-10">
               <span className="text-[10px] font-bold tracking-[0.15em] text-gray-400 uppercase">
                 MEERUAI · INTERPRETATION
@@ -176,11 +200,17 @@ export default function DifferenceSection() {
                 </motion.div>
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Mobile layout - unified stacked cards */}
-        <div className="lg:hidden rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:hidden rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm"
+        >
           {/* Header bar */}
           <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-white">
             <div className="flex items-center gap-2">
@@ -232,7 +262,7 @@ export default function DifferenceSection() {
               })}
             </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
