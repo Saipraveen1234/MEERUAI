@@ -19,7 +19,7 @@ export default function AboutHeroSection() {
         className="w-full flex items-center justify-center px-4 pt-10 lg:pt-14 pb-4"
       >
         <Image
-          src="/meeru-logo-big.png"
+          src="/about.png"
           alt="MeeruAI"
           width={1200}
           height={220}
