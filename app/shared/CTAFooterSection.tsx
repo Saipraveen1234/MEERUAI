@@ -33,7 +33,7 @@ export default function CTAFooterSection({ showCTA = true }: { showCTA?: boolean
           transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl lg:text-5xl xl:text-[56px] font-light leading-[1.2] text-gray-900 max-w-4xl mx-auto mb-6"
         >
-          Finance finally has a system that finishes the work, not just explains it.
+          Finance finally has a system that finishes the work, not just <span className="whitespace-nowrap">explains it.</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, x: -60 }}
