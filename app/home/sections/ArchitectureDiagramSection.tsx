@@ -180,7 +180,7 @@ export default function ArchitectureDiagramSection() {
                 <div className="flex items-center gap-1">
                   <img
                     src="/meeru-m-coral.png"
-                    alt="M"
+                    alt=""
                     className="h-8 w-auto object-contain"
                   />
                   <span className="text-[26px] font-extrabold text-gray-900 tracking-tight leading-none">

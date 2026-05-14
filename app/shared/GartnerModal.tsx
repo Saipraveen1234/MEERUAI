@@ -178,9 +178,9 @@ export default function GartnerModal({ isOpen, onClose }: GartnerModalProps) {
                 {/* Footer */}
                 <p className="text-center text-xs text-gray-400 pb-2">
                   New to FES?{" "}
-                  <a href="#" className="text-meeru-orange font-medium hover:underline">
+                  <span className="text-meeru-orange font-medium">
                     Learn more about Gartner FES 2026
-                  </a>
+                  </span>
                 </p>
               </div>
             </motion.div>

@@ -113,12 +113,11 @@ export default function CapabilitiesSection() {
 
                 {/* SVG + Explore — slides right and fades out on hover (desktop only) */}
                 <div className="mt-auto flex items-end justify-between transition-all duration-500 ease-in-out md:group-hover:translate-x-[130%] md:group-hover:opacity-0">
-                  <a
-                    href="#"
-                    className="inline-flex items-center gap-2 text-meeru-orange text-sm font-medium"
+                  <span
+                    className="inline-flex items-center gap-2 text-meeru-orange text-sm font-medium cursor-default"
                   >
                     Explore <ArrowRight className="w-4 h-4" />
-                  </a>
+                  </span>
                   <div>{cap.icon}</div>
                 </div>
               </div>

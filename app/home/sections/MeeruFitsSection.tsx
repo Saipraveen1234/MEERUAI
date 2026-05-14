@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
 const QUOTE_TEXT = "ERP records. BI reports. MeeruAI gets the work done.";
@@ -24,11 +25,11 @@ export default function MeeruFitsSection() {
   const [typedText, setTypedText] = useState("");
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [isInView, setIsInView] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+  const quoteRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const cardsInView = useInView(cardsRef, { once: true, amount: 0.3 });
 
-  // Intersection Observer to trigger typing when section is in view
+  // Intersection Observer to trigger typing when quote card is in view
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -39,8 +40,8 @@ export default function MeeruFitsSection() {
       { threshold: 0.3 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (quoteRef.current) {
+      observer.observe(quoteRef.current);
     }
 
     return () => observer.disconnect();
@@ -65,21 +66,28 @@ export default function MeeruFitsSection() {
   }, [isInView]);
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-white py-20 lg:py-32 overflow-hidden">
+    <section className="relative w-full bg-white py-20 lg:py-32 overflow-hidden">
       {/* Background M Logo with Glow */}
       <div className="absolute top-0 right-0 w-1/2 h-[600px] pointer-events-none z-0">
         {/* Soft radial glow */}
         <div className="absolute right-[10%] top-[10%] w-[350px] h-[350px] bg-[#FF7448]/15 blur-[100px] rounded-full" />
         {/* M logo positioned right */}
-        <img 
-          src="/meeru-m-coral.png"
-          alt="Background Logo" 
-          className="absolute right-[5%] top-[10%] h-[350px] w-auto object-contain opacity-[0.25]"
+        <div 
+          className="absolute right-[5%] top-[10%] h-[350px] w-[350px] opacity-[0.25]"
           style={{
             maskImage: "radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%)",
             WebkitMaskImage: "radial-gradient(ellipse at 50% 45%, black 20%, transparent 70%)"
           }}
-        />
+        >
+          <Image 
+            src="/meeru-m-coral.png"
+            alt=""
+            fill
+            className="object-contain"
+            sizes="350px"
+            priority={false}
+          />
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -117,7 +125,7 @@ export default function MeeruFitsSection() {
                 <div className="absolute inset-0 rounded-xl bg-gradient-radial from-[#FF7448]/10 to-transparent opacity-0 data-[visible=true]:opacity-100 transition-opacity duration-700" />
                 <div className="relative z-10 flex items-start justify-between gap-4">
                   <div>
-                    <img src="/meeruai-logo.png" alt="MeeruAI" className="h-[22px] w-auto object-contain mb-3" />
+                    <Image src="/meeruai-logo.png" alt="MeeruAI" width={88} height={22} className="object-contain mb-3" />
                     <div className="flex items-start gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-meeru-orange mt-1.5 shrink-0" />
                       <p className="text-[11px] text-gray-600 leading-relaxed">
@@ -181,7 +189,7 @@ export default function MeeruFitsSection() {
             </div>
 
           {/* Right Column (Quote Card) */}
-          <div className="w-full lg:w-[460px] shrink-0">
+          <div ref={quoteRef} className="w-full lg:w-[460px] shrink-0">
             <div className="rounded-[1.5rem] border border-[#FF7448]/20 bg-white/90 backdrop-blur-sm p-6 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <h3 className="text-[1.65rem] font-normal text-gray-900 leading-[1.3] tracking-tight mb-6 min-h-[3.5rem]">
                 <span className="text-gray-900">"{typedText}</span>

@@ -70,12 +70,12 @@ export default function Navbar() {
                     transition={{ duration: 0.2 }}
                     className="absolute top-full left-0 mt-4 w-48 bg-white rounded-xl border border-gray-100 shadow-xl py-2"
                   >
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Careers</a>
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Blog</a>
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Podcast</a>
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Vocabulary</a>
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">Events</a>
-                    <a href="#" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-meeru-orange-light hover:text-meeru-orange transition-colors">White Papers</a>
+                    <span className="block px-4 py-2.5 text-sm text-gray-400 cursor-default">Careers</span>
+                    <span className="block px-4 py-2.5 text-sm text-gray-400 cursor-default">Blog</span>
+                    <span className="block px-4 py-2.5 text-sm text-gray-400 cursor-default">Podcast</span>
+                    <span className="block px-4 py-2.5 text-sm text-gray-400 cursor-default">Vocabulary</span>
+                    <span className="block px-4 py-2.5 text-sm text-gray-400 cursor-default">Events</span>
+                    <span className="block px-4 py-2.5 text-sm text-gray-400 cursor-default">White Papers</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -121,9 +121,6 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="pt-4 border-t border-gray-100 flex flex-col gap-3">
-                <a href="#" className="text-base font-medium text-gray-600 hover:text-meeru-orange transition-colors">
-                  Resources
-                </a>
                 <button
                   onClick={() => {
                     setMobileOpen(false);

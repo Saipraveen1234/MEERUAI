@@ -288,7 +288,7 @@ export default function ArchitectureSection() {
                   <div className="flex items-center justify-center">
                     <img
                       src="/meeru-m-coral.png"
-                      alt="M"
+                      alt=""
                       className="h-8 w-auto object-contain mr-0.5"
                     />
                     <span className="text-[28px] font-extrabold text-gray-900 tracking-tight leading-none">

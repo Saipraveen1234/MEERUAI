@@ -44,14 +44,14 @@ export default function HeroSection() {
   }, [hasStarted]);
 
   return (
-    <section className="relative w-full bg-white pt-32 lg:pt-40 pb-16 lg:pb-24 overflow-hidden">
+    <section className="relative w-full bg-white pt-40 lg:pt-56 pb-24 lg:pb-36 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-4xl lg:max-w-5xl">
           <motion.div
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.15 }}
-            className="space-y-8"
+            className="space-y-6 lg:space-y-8"
           >
             <motion.h1
               variants={fadeUp}

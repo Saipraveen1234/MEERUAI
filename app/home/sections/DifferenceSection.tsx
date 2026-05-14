@@ -75,7 +75,7 @@ export default function DifferenceSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[36px] lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-2xl pr-20 lg:pr-0"
+            className="text-[34px] lg:text-5xl font-light leading-[1.15] text-gray-900 max-w-4xl"
           >
             Watch the Numbers Land and Discover What they Mean for Your Team.
           </motion.h2>
@@ -220,19 +220,19 @@ export default function DifferenceSection() {
             <span className="text-xs text-gray-400 font-medium transition-all">{slideCounter}</span>
           </div>
 
-          {/* Stacked unified cards — progressive reveal like desktop ledger */}
-          <div className="divide-y divide-gray-100 pb-2">
-            <AnimatePresence>
-              {allLedgerItems.slice(0, currentSlide + 1).map((item, index) => {
-                const interp = interpretations[index];
-                return (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    transition={{ duration: 0.4 }}
-                    className="px-5 py-6 bg-white overflow-hidden"
-                  >
+          {/* Stacked unified cards — fixed height to prevent layout jump */}
+          <div className="pb-2">
+            {allLedgerItems.map((item, index) => {
+              const interp = interpretations[index];
+              const isVisible = index <= currentSlide;
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={false}
+                  animate={{ opacity: isVisible ? 1 : 0 }}
+                  transition={{ duration: 0.5 }}
+                  className={`px-5 py-6 bg-white overflow-hidden transition-colors duration-500 ${!isVisible ? 'pointer-events-none' : ''} ${index > 0 ? (isVisible ? 'border-t border-gray-100' : 'border-t border-transparent') : ''}`}
+                >
                     {/* Ledger row */}
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-4 min-w-0">
@@ -257,9 +257,8 @@ export default function DifferenceSection() {
                       {interp.footer}
                     </p>
                   </motion.div>
-                );
-              })}
-            </AnimatePresence>
+              );
+            })}
           </div>
         </motion.div>
       </div>
